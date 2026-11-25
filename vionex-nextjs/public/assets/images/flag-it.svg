@@ -1,0 +1,21 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="22.7377" height="14" viewBox="0 0 22.7377 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="country-04" clip-path="url(#clip0_0_16)">
+<path id="Vector" d="M18.4739 0.60612H1.55556C0.803835 0.60612 0.194444 1.21551 0.194444 1.96723V12.1895C0.194444 12.9412 0.803835 13.5506 1.55556 13.5506H18.4739C19.2257 13.5506 19.835 12.9412 19.835 12.1895V1.96723C19.835 1.21551 19.2257 0.60612 18.4739 0.60612Z" fill="white" stroke="#F3F4F6" stroke-width="0.5"/>
+<mask id="mask0_0_16" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="22" height="14">
+<g id="mask0">
+<path id="Vector_2" d="M18.4739 0.60612H1.55556C0.803835 0.60612 0.194444 1.21551 0.194444 1.96723V12.1895C0.194444 12.9412 0.803835 13.5506 1.55556 13.5506H18.4739C19.2257 13.5506 19.835 12.9412 19.835 12.1895V1.96723C19.835 1.21551 19.2257 0.60612 18.4739 0.60612Z" fill="white" stroke="white" stroke-width="0.5"/>
+</g>
+</mask>
+<g mask="url(#mask0_0_16)">
+<g id="Group">
+<path id="Vector_3" d="M20.0294 0.411675H13.3529V13.745H20.0294V0.411675Z" fill="#E43D4C"/>
+<path id="Vector_4" fill-rule="evenodd" clip-rule="evenodd" d="M0 13.745H6.67651V0.411675H0V13.745Z" fill="#1BB65D"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_16">
+<rect width="22.7377" height="14" fill="white"/>
+</clipPath>
+</defs>
+</svg>

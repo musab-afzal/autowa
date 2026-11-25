@@ -1,0 +1,22 @@
+{
+  "name": "autowa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "convert": "node scripts/convert-html.mjs ../"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "lucide-react": "^1.79.0",
+    "next": "16.4.6",
+    "pdfkit": "^0.21.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "parse5": "^7.3.0"
+  }
+}

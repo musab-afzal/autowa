@@ -1,0 +1,682 @@
+/* ============================================================
+   Vionex — themes.css
+   Single source of truth for the design system: font loading, global
+   (non-theme) tokens, the shared colour palette, Light / Dark modes,
+   the 6 brand colour presets and the customizer presets
+   (radius / container). Everything the UI consumes is a CSS variable
+   defined here.
+   Load FIRST among the project stylesheets (before dashboard.css).
+   ============================================================ */
+
+/* ============================================================
+   1. FONTS  (Roboto — local files in assets/fonts)
+   ============================================================ */
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("../fonts/Roboto-Light.woff2") format("woff2"),
+    url("../fonts/Roboto-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("../fonts/Roboto-Regular.woff2") format("woff2"),
+    url("../fonts/Roboto-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("../fonts/Roboto-Medium.woff2") format("woff2"),
+    url("../fonts/Roboto-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("../fonts/Roboto-SemiBold.woff2") format("woff2"),
+    url("../fonts/Roboto-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("../fonts/Roboto-Bold.woff2") format("woff2"),
+    url("../fonts/Roboto-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("../fonts/Roboto-ExtraBold.woff2") format("woff2"),
+    url("../fonts/Roboto-ExtraBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   2. GLOBAL TOKENS  (non-theme — identical in every mode)
+   Typography, radius scale, layout metrics, motion + the Bootstrap
+   bridge. Theme-independent, so they sit in a plain :root.
+   ============================================================ */
+:root {
+  /* Typography */
+  --font-base: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Type scale — body default = --fs-base (16px, per the design) */
+  --fs-xs: 0.75rem; /* 12px */
+  --fs-sm: 0.8125rem; /* 13px */
+  --fs-md: 0.875rem; /* 14px */
+  --fs-lg: 0.9375rem; /* 15px */
+  --fs-base: 1rem; /* 16px — body */
+
+  /* Radius — design uses 12 / 16 / 20px + pills (default = medium) */
+  --radius-1: 0.625rem; /* 10px */
+  --radius-2: 0.75rem; /* 12px */
+  --radius-3: 1rem; /* 16px — standard card */
+  --radius-4: 1.25rem; /* 20px — stat / hero card */
+  --radius-5: 1.75rem; /* 28px */
+  --radius-pill: 50rem;
+
+  /* Layout metrics — dual sidebar = icon rail + nav panel */
+  --rail-w: 86px;
+  --panel-w: 260px;
+  --sidebar-w: calc(var(--rail-w) + var(--panel-w));
+  --header-h: 82px;
+
+  /* Boxed layout shell — ONE source of truth for the whole app frame.
+     --shell-max = max width of the application; --shell-gutter = symmetric
+     side gutter (0 for full width, computed for boxed in section 7). */
+  --shell-max: 1600px;
+  --shell-gutter: 0px;
+
+  /* Motion */
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shared focus ring (inputs, selects, pagination) */
+  --focus-shadow: 0 0 0 3px var(--focus-ring);
+
+  /* Bootstrap bridges — native utilities follow our tokens, so the
+     customizer's [data-radius] presets re-skin every Bootstrap component
+     live and .border / .shadow-* track the active mode. */
+  --bs-border-color: var(--border-color);
+  --bs-box-shadow-sm: var(--shadow-1);
+  --bs-box-shadow: var(--shadow-2);
+  --bs-box-shadow-lg: var(--shadow-3);
+  --bs-border-radius-sm: var(--radius-1);
+  --bs-border-radius: var(--radius-2);
+  --bs-border-radius-lg: var(--radius-3);
+  --bs-border-radius-xl: var(--radius-4);
+  --bs-border-radius-xxl: var(--radius-5);
+  --bs-border-radius-pill: var(--radius-pill);
+  --bs-body-font-family: var(--font-base);
+}
+
+/* ============================================================
+   3. SHARED COLOUR TOKENS  (theme-independent)
+   Status hues, the categorical chart palette and the decorative
+   gradients. Per-mode soft tints live in the Light / Dark blocks.
+   ============================================================ */
+:root {
+  /* Semantic status — base + strong (soft variants are per-mode) */
+  --success: #059669;
+  --success-strong: #047857;
+  --warning: #d97706;
+  --warning-strong: #b45309;
+  --danger: #dc2626;
+  --danger-strong: #b91c1c;
+  --info: #3b82f6;
+  --info-strong: #2563eb;
+
+  /* Categorical palette — drives charts, progress bars and tints */
+  --cat-brand: var(--primary);
+  --cat-violet: #7c3aed;
+  --cat-blue: #3b82f6;
+  --cat-cyan: #06b6d4;
+  --cat-emerald: #059669;
+  --cat-amber: #f59e0b;
+  --cat-orange: #d97706;
+  --cat-rose: #f43f5e;
+  --cat-red: #dc2626;
+  --cat-magenta: #d406b9;
+  --cat-yellow: #fbee8d;
+  --cat-lime: #84cc16;
+  --cat-slate: #94a3b8;
+  --cat-neutral: var(--track-bg);
+
+  /* Neutral donut ramp — consumed by the shared premium-donut chart builder */
+  --donut-cloud: #e9eaf0;
+  --donut-slate: #ccd3e1;
+  --donut-blue: #9fb4d8;
+  --donut-ink: #6b7184;
+
+  /* Chrome accents — scrim behind the mobile drawer + the rail button pill.
+     Identical in both modes: they always sit on the navy chrome. */
+  --backdrop: rgba(6, 23, 34, 0.5);
+  --rail-btn-bg: rgba(10, 57, 84, 0.25);
+
+  /* Gradient palette (avatars, badges, decorative fills) */
+  --grad-1: linear-gradient(135deg, #7c3aed, #4c1d95);
+  --grad-2: linear-gradient(135deg, #e11d48, #9f1239);
+  --grad-3: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  --grad-4: linear-gradient(135deg, #f59e0b, #d97706);
+  --grad-5: linear-gradient(135deg, #059669, #065f46);
+  --grad-6: linear-gradient(180deg, #da6e10, #ff4646);
+
+  /* Scrim laid over photographic media so the frame settles into the card it
+     sits in. Deliberately theme-agnostic: it darkens the photo itself, so it
+     stays the same black ramp in every theme and in both modes. */
+  --media-scrim: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+
+  /* Soft washes — two-stop pastel fills for stat / KPI cards. Both stops are
+     mixed INTO --surface-plain from the categorical palette, so one token
+     reads as a pastel in light mode and as a tinted dark card in dark mode.
+     --wash-1 / --wash-2 are the shared stop strengths (dark mode lowers them
+     in section 5), which keeps every wash at the same visual weight. */
+  --wash-0: 6%;
+  --wash-1: 14%;
+  --wash-2: 48%;
+  --wash-rose: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cat-rose) var(--wash-1), var(--surface-plain)),
+    color-mix(in srgb, var(--cat-yellow) var(--wash-2), var(--surface-plain))
+  );
+  --wash-emerald: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cat-emerald) var(--wash-1), var(--surface-plain)),
+    color-mix(in srgb, var(--cat-emerald) var(--wash-2), var(--surface-plain))
+  );
+  --wash-amber: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cat-amber) var(--wash-1), var(--surface-plain)),
+    color-mix(in srgb, var(--cat-yellow) var(--wash-2), var(--surface-plain))
+  );
+  --wash-blue: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cat-blue) var(--wash-1), var(--surface-plain)),
+    color-mix(in srgb, var(--cat-blue) var(--wash-2), var(--surface-plain))
+  );
+  /* The theme-following member of the family — mixed from --cat-brand (like
+     --promo-gradient below) so a metric grid re-skins with the active preset
+     instead of pinning one hue. Flat, at the --wash-0 stop: this fills a
+     repeating grid rather than a single hero card, and a vertical ramp would
+     restart in every tile and read as banding down the grid. */
+  --wash-brand: color-mix(
+    in srgb,
+    var(--cat-brand) var(--wash-0),
+    var(--surface-plain)
+  );
+  --wash-violet: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cat-violet) var(--wash-1), var(--surface-plain)),
+    color-mix(in srgb, var(--cat-magenta) var(--wash-2), var(--surface-plain))
+  );
+  /* The cool bridge of the family: every other two-hue wash ramps warm
+     (rose/amber to yellow) or stays on one hue, so a panel that needs to read
+     cool across two stops had nothing to sit on. */
+  --wash-indigo: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cat-blue) var(--wash-1), var(--surface-plain)),
+    color-mix(in srgb, var(--cat-violet) var(--wash-2), var(--surface-plain))
+  );
+
+  /* Pastel branded surfaces — same color-mix idea as the --wash-* family, but
+     mixed into white rather than --surface-plain so they stay light in BOTH
+     modes. That is deliberate: these back full-colour brand marks (see the
+     logo-*.svg assets), which have fixed brand colours and cannot re-skin, so
+     the surface under them must not darken. Pair with --nav-bg for the ink. */
+  --pastel-amber: color-mix(in srgb, var(--cat-amber) 42%, #fff);
+  --pastel-rose: color-mix(in srgb, var(--cat-rose) 38%, #fff);
+  --pastel-cyan: color-mix(in srgb, var(--cat-cyan) 30%, #fff);
+  --pastel-emerald: color-mix(in srgb, var(--cat-emerald) 32%, #fff);
+
+  /* Card-face gradients — deep two-stop ramps for surfaces that read as a
+     physical card (a wallet hero, a bank or payment card). Fixed hexes like the
+     --grad-* family above rather than preset-mixed: a card face is its own
+     object with its own identity, so it holds under every theme and in dark
+     mode instead of re-skinning with the chrome. */
+  --grad-slate: linear-gradient(161deg, #0f172a 0%, #1e293b 60%, #334155 100%);
+  --grad-indigo: linear-gradient(112deg, #25229f, #0400c4);
+  --grad-crimson: linear-gradient(126deg, #640000, #a7090e);
+  --grad-orchid: linear-gradient(142deg, #7c3aed 0%, #8b5cf6 60%, #a78bfa 100%);
+  --grad-azure: linear-gradient(158deg, #1d4ed8 0%, #2563eb 60%, #3b82f6 100%);
+  /* Deep-set members of the same family, for a card face that has to sit ON a
+     dark panel: --grad-azure and --grad-4 are lit for a light page and glare
+     there, and light-on-dark text needs the face to stay well below it. */
+  --grad-bronze: linear-gradient(170deg, #8e5b05 0%, #5a3803 100%);
+  /* The one preset-FOLLOWING member of the family. The rest are fixed hues
+     because a card face is its own object, but a hero's summary panel belongs
+     to the page chrome, so this one is mixed from the active theme colour and
+     re-skins with it. Mixed into the nav ramp rather than into flat black, so
+     it always lands a step above the on-dark panel it sits on. */
+  --grad-theme: linear-gradient(
+    170deg,
+    color-mix(in srgb, var(--primary) 30%, var(--nav-bg-strong)) 0%,
+    color-mix(in srgb, var(--primary) 8%, var(--nav-bg-deep)) 100%
+  );
+
+  /* Deepest step of the nav-chrome ramp, below --nav-bg-strong. Mixed from the
+     active preset rather than a fixed near-black, so an on-dark panel that needs
+     to sit UNDER the nav ground (a ticker rail, a media strip) still carries the
+     theme's hue. Same derivation style as the dark-mode surfaces in §5. */
+  --nav-bg-deep: color-mix(in srgb, var(--nav-bg) 14%, #000);
+
+  /* Sidebar promo wash — mixed from the active preset (like --cat-brand above)
+     so it re-skins with the theme instead of being a fixed blue. Same angle,
+     stops and opacities as before; only the hue now follows --primary. */
+  --promo-gradient: linear-gradient(
+    132deg,
+    color-mix(in srgb, var(--primary) 8%, transparent) 25%,
+    color-mix(in srgb, var(--primary) 20%, transparent) 44%,
+    color-mix(in srgb, var(--primary) 12%, transparent) 65%
+  );
+}
+
+/* ============================================================
+   4. LIGHT MODE  (default surfaces / text / borders / shadows)
+   ============================================================ */
+:root,
+[data-bs-theme="light"] {
+  /* Surfaces & borders */
+  --bg-app: #ffffff;
+  --surface: #fafaff;
+  --surface-soft: #f3f3ff;
+  --surface-muted: #eeeefb;
+  --surface-plain: #ffffff;
+  --border-color: #dbdbff;
+  --border-soft: #ececff;
+  --track-bg: #f2f2f2;
+
+  /* Chart chrome — a hairline rule over a near-white plot reads weaker than
+     the same colour around a filled card, so the chart card's edge and the
+     plot's guide lines sit a step darker than --border-color and shift to a
+     neutral blue-grey. Card edge first, guide lines a shade lighter so they
+     stay behind the data. */
+  --chart-border: #a9b6cb;
+  --chart-grid: #bcc7d8;
+  /* On-mark label ink — for a value printed INSIDE a saturated plot mark (donut
+     arc, stacked column). It rides the mark, not the surface, so it stays light
+     in both modes and is deliberately not overridden below. */
+  --chart-label-on-fill: #ffffff;
+
+  /* Text */
+  --text-title: #0d0b1e;
+  --text-primary: #2f2f2f;
+  --text-secondary: #55555f;
+  --text-muted: #818181;
+
+  /* Status soft tints */
+  --success-soft: #e1ffe4;
+  --warning-soft: #fff7d9;
+  --danger-soft: #ffe4e4;
+  --info-soft: #e7f1ff;
+
+  /* "Ink" = the text/icon colour that sits ON a matching -soft tint.
+     Light mode reads the strong end of each ramp; dark mode flips these to
+     the light end (section 5) so tinted chips never go dark-on-dark. */
+  --primary-ink: var(--primary-active);
+  --success-ink: var(--success-strong);
+  --warning-ink: var(--warning-strong);
+  --danger-ink: var(--danger-strong);
+  --info-ink: var(--info-strong);
+
+  /* Elevation — the design is near-flat, so shadows stay whisper-soft */
+  --shadow-1: 0 1px 2px rgba(13, 11, 30, 0.04);
+  --shadow-2: 0 4px 20px rgba(13, 11, 30, 0.04);
+  --shadow-3: 0 18px 40px rgba(13, 11, 30, 0.1);
+
+  /* Flat single-ink artwork dropped in as an <img> is exported in one dark
+     ink, which reads here but not on the dark canvas — dark mode flips it
+     (section 5). Consumed by .orb-art in dashboard.css. */
+  --art-invert: 0;
+}
+
+/* ============================================================
+   5. DARK MODE  (manually optimised — not an inversion)
+   Mirrors the Light block variable-for-variable. The chrome (sidebar +
+   header) is deliberately NOT touched here — it keeps the preset's navy
+   from section 6. Instead the content area is derived FROM that navy, one
+   family, so page, cards and chrome read as one material in every preset.
+   ============================================================ */
+[data-bs-theme="dark"] {
+  /* Surfaces & borders — the content area is the SIDEBAR's own navy, darkened.
+     Every step is mixed from the active preset's chrome (--nav-bg / its soft
+     tone), so the page reads as one material with the sidebar and header —
+     and re-skins with the preset instead of being a fixed blue. The chrome
+     itself is untouched: it stays the lightest tone, the content sits under it.
+     Canvas → card → raised → fills → borders, darkest to lightest. */
+  --bg-app: color-mix(in srgb, var(--nav-bg) 52%, #000);
+  --surface: color-mix(in srgb, var(--nav-bg) 80%, #000);
+  --surface-plain: color-mix(in srgb, var(--nav-bg) 88%, #000);
+  --surface-soft: var(--nav-bg);
+  --surface-muted: color-mix(in srgb, var(--nav-bg-soft) 88%, #000);
+  --border-soft: color-mix(in srgb, var(--nav-bg) 96%, #000);
+  --border-color: color-mix(in srgb, var(--nav-bg-soft) 84%, #000);
+  --track-bg: color-mix(in srgb, var(--nav-bg) 96%, #000);
+
+  /* Chart chrome — same one-step lift as light mode, in the other direction:
+     less black mixed in than --border-color, so the chart card edge and plot
+     rules clear the darkened surface without turning into bright lines. */
+  --chart-border: color-mix(in srgb, var(--nav-bg-soft) 86%, #fff);
+  --chart-grid: var(--nav-bg-soft);
+
+  /* Text — soft off-white down to muted steel, never pure white.
+     Muted still clears 4.5:1 on --surface. */
+  --text-title: #eff6fa;
+  --text-primary: #cfdde7;
+  --text-secondary: #adbcc8;
+  --text-muted: #8497a6;
+
+  /* Status — lifted one step so solid fills and icons hold up on the navy */
+  --success: #10b981;
+  --success-strong: #059669;
+  --warning: #f59e0b;
+  --warning-strong: #d97706;
+  --danger: #ef4444;
+  --danger-strong: #dc2626;
+  --info: #3b82f6;
+  --info-strong: #2563eb;
+
+  /* Ink flips to the LIGHT end of each ramp for text on a -soft tint */
+  --success-ink: #34d399;
+  --warning-ink: #fbbf24;
+  --danger-ink: #f87171;
+  --info-ink: #60a5fa;
+
+  /* Soft tints are mixed INTO the card surface rather than left translucent,
+     so a chip is the same colour wherever it lands. */
+  --success-soft: color-mix(in srgb, var(--success) 18%, var(--surface));
+  --warning-soft: color-mix(in srgb, var(--warning) 18%, var(--surface));
+  --danger-soft: color-mix(in srgb, var(--danger) 18%, var(--surface));
+  --info-soft: color-mix(in srgb, var(--info) 18%, var(--surface));
+
+  /* Categorical palette — only the hues that went muddy on a dark canvas are
+     lifted, each to a value that clears 4.5:1 as text on --surface while
+     still carrying white text as a .bg-cat-* fill. */
+  --cat-violet: #8b5cf6;
+  --cat-emerald: #10b981;
+  --cat-orange: #f97316;
+  --cat-red: #f87171;
+  --cat-magenta: #d946ef;
+  --cat-yellow: #fde68a;
+  --cat-lime: #a3e635;
+
+  /* Wash stops pulled back — the same mix that reads as a pastel over white
+     is garish over the navy, so the tint stays a hint of hue on a dark card. */
+  --wash-0: 5%;
+  --wash-1: 10%;
+  --wash-2: 26%;
+
+  /* Flip the flat single-ink artwork (section 4) so its dark ink reads as
+     light on the navy canvas, from one export instead of two. */
+  --art-invert: 1;
+
+  /* Neutral donut ramp — same chrome family, inverted (cloud = darkest) */
+  --donut-cloud: var(--surface-muted);
+  --donut-slate: var(--nav-bg-soft);
+  --donut-blue: color-mix(
+    in srgb,
+    var(--nav-bg-soft) 45%,
+    var(--text-secondary)
+  );
+  --donut-ink: var(--text-primary);
+
+  /* Elevation — deeper and blue-black, since a dark surface needs the
+     shadow to do the separating that a border does in light mode. */
+  --shadow-1: 0 1px 2px rgba(2, 6, 16, 0.5);
+  --shadow-2: 0 8px 24px rgba(2, 6, 16, 0.55);
+  --shadow-3: 0 24px 48px rgba(2, 6, 16, 0.6);
+}
+
+/* ============================================================
+   5b. FROZEN PAGE PALETTE
+   ============================================================ */
+:root {
+  --surface-page: var(--surface);
+  --surface-plain-page: var(--surface-plain);
+  --surface-soft-page: var(--surface-soft);
+  --surface-muted-page: var(--surface-muted);
+  --border-color-page: var(--border-color);
+  --border-soft-page: var(--border-soft);
+  --track-bg-page: var(--track-bg);
+  --text-title-page: var(--text-title);
+  --text-primary-page: var(--text-primary);
+  --text-secondary-page: var(--text-secondary);
+  --text-muted-page: var(--text-muted);
+}
+
+/* ============================================================
+   6. COLOUR PRESETS  (6 brand themes)
+   ============================================================ */
+:root,
+[data-theme="cyan"] {
+  --primary: #1ccbe5;
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 28, 203, 229;
+  --primary-hover: #15b3cb;
+  --primary-active: #0f9bb1;
+  --secondary: #00eeff;
+  --accent: #8df0ff;
+  --primary-soft: #e4fbff;
+  --primary-soft-2: #c4f4fc;
+  --text-on-primary: #062b3e;
+  --nav-bg: #103c57;
+  --nav-bg-strong: #052437;
+  --nav-bg-soft: #214b65;
+  --focus-ring: rgba(28, 203, 229, 0.25);
+  --hero-gradient: linear-gradient(
+    120deg,
+    #103c57 0%,
+    #1ccbe5 60%,
+    #8df0ff 100%
+  );
+}
+[data-theme="blue"] {
+  --primary: #2563eb;
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 37, 99, 235;
+  --primary-hover: #1d4fd0;
+  --primary-active: #1a45b8;
+  --secondary: #60a5fa;
+  --accent: #93c5fd;
+  --primary-soft: #e7efff;
+  --primary-soft-2: #d6e4ff;
+  --text-on-primary: #ffffff;
+  --nav-bg: #0f1f3d;
+  --nav-bg-strong: #08142a;
+  --nav-bg-soft: #1e3a5f;
+  --focus-ring: rgba(37, 99, 235, 0.25);
+  --hero-gradient: linear-gradient(
+    120deg,
+    #0f1f3d 0%,
+    #2563eb 60%,
+    #60a5fa 100%
+  );
+}
+[data-theme="indigo"] {
+  --primary: #4f46e5;
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 79, 70, 229;
+  --primary-hover: #4338ca;
+  --primary-active: #3730a3;
+  --secondary: #a5b4fc;
+  --accent: #c7d2fe;
+  --primary-soft: #ebe9fe;
+  --primary-soft-2: #ddd9fc;
+  --text-on-primary: #ffffff;
+  --nav-bg: #191545;
+  --nav-bg-strong: #100d2e;
+  --nav-bg-soft: #2b2668;
+  --focus-ring: rgba(79, 70, 229, 0.25);
+  --hero-gradient: linear-gradient(
+    120deg,
+    #191545 0%,
+    #4f46e5 60%,
+    #a5b4fc 100%
+  );
+}
+[data-theme="emerald"] {
+  --primary: #059669;
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 5, 150, 105;
+  --primary-hover: #047d58;
+  --primary-active: #036549;
+  --secondary: #34d399;
+  --accent: #6ee7b7;
+  --primary-soft: #def8ef;
+  --primary-soft-2: #c7f1e2;
+  --text-on-primary: #ffffff;
+  --nav-bg: #06291f;
+  --nav-bg-strong: #031913;
+  --nav-bg-soft: #0e4635;
+  --focus-ring: rgba(5, 150, 105, 0.25);
+  --hero-gradient: linear-gradient(
+    120deg,
+    #06291f 0%,
+    #059669 60%,
+    #34d399 100%
+  );
+}
+[data-theme="orange"] {
+  --primary: #ea580c;
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 234, 88, 12;
+  --primary-hover: #d24a08;
+  --primary-active: #b03e07;
+  --secondary: #fb923c;
+  --accent: #fdba74;
+  --primary-soft: #fdeadd;
+  --primary-soft-2: #fbd9c2;
+  --text-on-primary: #ffffff;
+  --nav-bg: #2e1405;
+  --nav-bg-strong: #1d0c03;
+  --nav-bg-soft: #4b2410;
+  --focus-ring: rgba(234, 88, 12, 0.25);
+  --hero-gradient: linear-gradient(
+    120deg,
+    #2e1405 0%,
+    #ea580c 60%,
+    #fb923c 100%
+  );
+}
+[data-theme="rose"] {
+  --primary: #e11d48;
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 225, 29, 72;
+  --primary-hover: #c8163d;
+  --primary-active: #a81235;
+  --secondary: #fb7185;
+  --accent: #fda4af;
+  --primary-soft: #fde7ec;
+  --primary-soft-2: #fbd2dc;
+  --text-on-primary: #ffffff;
+  --nav-bg: #2e0812;
+  --nav-bg-strong: #1e050c;
+  --nav-bg-soft: #4c1526;
+  --focus-ring: rgba(225, 29, 72, 0.25);
+  --hero-gradient: linear-gradient(
+    120deg,
+    #2e0812 0%,
+    #e11d48 60%,
+    #fb7185 100%
+  );
+}
+
+/* ------------------------------------------------------------
+   Dark-mode overrides that depend on the preset above, so they MUST come
+   after it (equal specificity — later wins). Applies to all 6 presets at once.
+   ------------------------------------------------------------ */
+[data-bs-theme="dark"] {
+  /* Soft tints lift off the navy surface instead of the light-mode pastels */
+  --primary-soft: color-mix(in srgb, var(--primary) 20%, var(--surface));
+  --primary-soft-2: color-mix(in srgb, var(--primary) 32%, var(--surface));
+  /* Brand ink on a soft tint = the light end of the ramp (see section 4) */
+  --primary-ink: var(--accent);
+
+  /* Bootstrap bridge — components we never restyled (accordion, list-group,
+     nav-tabs, toasts, popovers, tooltips, validation) derive from these.
+     Without the bridge they fall back to Bootstrap's neutral-grey dark
+     defaults and clash with the navy. Dark only; light keeps stock. */
+  --bs-body-bg: var(--bg-app);
+  --bs-body-color: var(--text-secondary);
+  --bs-emphasis-color: var(--text-title);
+  --bs-heading-color: var(--text-title);
+  --bs-secondary-color: var(--text-secondary);
+  --bs-secondary-bg: var(--surface-soft);
+  --bs-tertiary-color: var(--text-muted);
+  --bs-tertiary-bg: var(--surface-muted);
+  --bs-border-color-translucent: var(--border-color);
+
+  /* …and the contextual set, so stock .alert-* / .list-group-item-* /
+     .*-subtle utilities use our tints instead of Bootstrap's own blues. */
+  --bs-primary-bg-subtle: var(--primary-soft);
+  --bs-primary-border-subtle: var(--primary-soft-2);
+  --bs-primary-text-emphasis: var(--primary-ink);
+  --bs-success-bg-subtle: var(--success-soft);
+  --bs-success-border-subtle: var(--success-strong);
+  --bs-success-text-emphasis: var(--success-ink);
+  --bs-warning-bg-subtle: var(--warning-soft);
+  --bs-warning-border-subtle: var(--warning-strong);
+  --bs-warning-text-emphasis: var(--warning-ink);
+  --bs-danger-bg-subtle: var(--danger-soft);
+  --bs-danger-border-subtle: var(--danger-strong);
+  --bs-danger-text-emphasis: var(--danger-ink);
+  --bs-info-bg-subtle: var(--info-soft);
+  --bs-info-border-subtle: var(--info-strong);
+  --bs-info-text-emphasis: var(--info-ink);
+  --bs-secondary-bg-subtle: var(--surface-soft);
+  --bs-secondary-border-subtle: var(--border-color);
+  --bs-secondary-text-emphasis: var(--text-secondary);
+
+  --bs-link-color: var(--secondary);
+  --bs-link-hover-color: var(--accent);
+  --bs-code-color: var(--cat-rose);
+  --bs-highlight-color: var(--text-title);
+  --bs-highlight-bg: var(--warning-soft);
+  --bs-form-valid-color: var(--success-ink);
+  --bs-form-valid-border-color: var(--success);
+  --bs-form-invalid-color: var(--danger-ink);
+  --bs-form-invalid-border-color: var(--danger);
+}
+
+/* ============================================================
+   7. CUSTOMIZER PRESETS  (radius scale + container width)
+   ============================================================ */
+[data-radius="sm"] {
+  --radius-1: 0.25rem;
+  --radius-2: 0.375rem;
+  --radius-3: 0.5rem;
+  --radius-4: 0.625rem;
+  --radius-5: 0.875rem;
+}
+[data-radius="lg"] {
+  --radius-1: 0.875rem;
+  --radius-2: 1.125rem;
+  --radius-3: 1.5rem;
+  --radius-4: 1.75rem;
+  --radius-5: 2.25rem;
+}
+
+@media (min-width: 992px) {
+  [data-container="boxed"] {
+    --shell-gutter: max(0px, calc((100vw - min(var(--shell-max), 92vw)) / 2));
+  }
+}
+
+/* extra custom css */
+
+.mw-fit {
+  max-width: fit-content;
+}

@@ -1,0 +1,2965 @@
+/* ============================================================
+   Vionex — dashboard.css
+   Layout shell plus the reusable component/utility layer Bootstrap 5.3
+   cannot express. Every value reads from the tokens in themes.css, so
+   light/dark, the 6 presets, RTL and the radius presets need no duplicates.
+
+   COMMON
+     1  Local tokens            11 Layout modes
+     2  Base & Bootstrap bridge 12 Buttons
+     3  Typography              13 Forms
+     4  Colour utilities        14 Avatars, badges & tints
+     5  Surfaces & effects      15 Dropdowns & notifications
+     6  Scrollbars & rails      16 Tables & pagination
+     7  Icons & media           17 Progress, meters & legends
+     8  App shell               18 Charts & maps
+     9  Sidebar                 19 Theme customizer
+     10 Header & top nav
+   SECTIONS
+     20 Timeline                23 Marquee
+     21 Step flow               24 Drag & drop
+     22 Stat rails              25 App workspace
+   PAGES
+     26 Authentication          27 Calendar
+   28 Responsive
+   ============================================================ */
+
+/* ============================================================
+   1. LOCAL TOKENS
+   ============================================================ */
+:root {
+  /* Depth used by the .bg-fill-* family: one ratio for the whole set, so the
+     solid tiles read as siblings and clear 4.5:1 under white copy. */
+  --fill-depth: 62%;
+}
+
+/* ============================================================
+   2. BASE & BOOTSTRAP BRIDGE
+   ============================================================ */
+body {
+  font-family: var(--font-base);
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  background: var(--bg-app);
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-title);
+  margin: 0;
+  font-weight: 700;
+}
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+::selection {
+  background: var(--primary-soft-2);
+}
+
+.card {
+  --bs-card-bg: var(--surface);
+  --bs-card-color: var(--text-secondary);
+  --bs-card-border-color: var(--border-color);
+  --bs-card-border-radius: var(--radius-3);
+  --bs-card-inner-border-radius: calc(var(--radius-3) - 1px);
+  --bs-card-spacer-x: 1.25rem;
+  --bs-card-spacer-y: 1.25rem;
+  --bs-card-cap-bg: transparent;
+  --bs-card-cap-padding-y: 1.25rem;
+}
+.progress,
+.progress-stacked {
+  --bs-progress-bg: var(--track-bg);
+  --bs-progress-height: 0.375rem;
+  --bs-progress-border-radius: var(--radius-pill);
+  --bs-progress-bar-bg: var(--primary);
+}
+.badge {
+  --bs-badge-font-weight: 600;
+  --bs-badge-border-radius: var(--radius-pill);
+  --bs-badge-padding-x: 0.75rem;
+  --bs-badge-padding-y: 0.4rem;
+  --bs-badge-font-size: var(--fs-md);
+}
+.breadcrumb {
+  --bs-breadcrumb-divider-color: var(--text-muted);
+  --bs-breadcrumb-item-active-color: var(--text-title);
+  --bs-breadcrumb-font-size: var(--fs-base);
+}
+.offcanvas {
+  --bs-offcanvas-bg: var(--surface);
+  --bs-offcanvas-color: var(--text-secondary);
+  --bs-offcanvas-border-color: var(--border-color);
+}
+.modal {
+  --bs-modal-bg: var(--surface);
+  --bs-modal-color: var(--text-secondary);
+  --bs-modal-border-color: var(--border-color);
+  --bs-modal-border-radius: var(--radius-3);
+}
+.nav-pills {
+  --bs-nav-pills-border-radius: var(--radius-pill);
+  --bs-nav-pills-link-active-bg: var(--secondary);
+  --bs-nav-pills-link-active-color: var(--nav-bg);
+  --bs-nav-link-color: var(--text-secondary);
+  --bs-nav-link-hover-color: var(--text-title);
+  --bs-nav-link-font-size: var(--fs-md);
+  --bs-nav-link-padding-y: 0.375rem;
+  --bs-nav-link-padding-x: 0.875rem;
+}
+
+/* ============================================================
+   3. TYPOGRAPHY
+   ============================================================ */
+.fs-xs {
+  font-size: var(--fs-xs);
+}
+.fs-sm {
+  font-size: var(--fs-sm);
+}
+.fs-md {
+  font-size: var(--fs-md);
+}
+.fs-lg {
+  font-size: var(--fs-lg);
+}
+.text-tracked {
+  letter-spacing: 0.06em;
+}
+
+/* ============================================================
+   4. COLOUR UTILITIES
+   Text, background and border helpers that resolve to design tokens.
+   ============================================================ */
+.text-title {
+  color: var(--text-title) !important;
+}
+.text-body-2 {
+  color: var(--text-secondary) !important;
+}
+.text-muted-2,
+.text-muted {
+  color: var(--text-muted) !important;
+}
+.text-primary,
+.text-primary-soft {
+  color: var(--text-primary) !important;
+}
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+.text-brand {
+  color: var(--primary) !important;
+}
+.text-accent {
+  color: var(--secondary) !important;
+}
+.text-on-primary {
+  color: var(--text-on-primary) !important;
+}
+.text-nav,
+.text-ink {
+  color: var(--nav-bg) !important;
+}
+.text-danger {
+  color: var(--danger) !important;
+}
+.text-success {
+  color: var(--success) !important;
+}
+.text-cat-brand {
+  color: var(--cat-brand) !important;
+}
+.text-cat-violet {
+  color: var(--cat-violet) !important;
+}
+.text-cat-blue {
+  color: var(--cat-blue) !important;
+}
+.text-cat-cyan {
+  color: var(--cat-cyan) !important;
+}
+.text-cat-emerald {
+  color: var(--cat-emerald) !important;
+}
+.text-cat-amber {
+  color: var(--cat-amber) !important;
+}
+.text-cat-orange {
+  color: var(--cat-orange) !important;
+}
+.text-cat-rose {
+  color: var(--cat-rose) !important;
+}
+.text-cat-red {
+  color: var(--cat-red) !important;
+}
+.text-cat-magenta {
+  color: var(--cat-magenta) !important;
+}
+.text-cat-lime {
+  color: var(--cat-lime) !important;
+}
+.text-cat-slate {
+  color: var(--cat-slate) !important;
+}
+
+.bg-app {
+  background-color: var(--bg-app) !important;
+}
+.white-bg,
+.bg-surface {
+  background-color: var(--surface) !important;
+}
+.bg-plain {
+  background-color: var(--surface-plain) !important;
+}
+.bg-soft {
+  background-color: var(--surface-soft) !important;
+}
+.bg-muted {
+  background-color: var(--surface-muted) !important;
+}
+.bg-nav {
+  background-color: var(--nav-bg) !important;
+}
+.bg-nav-strong {
+  background-color: var(--nav-bg-strong) !important;
+}
+.bg-nav-deep {
+  background-color: var(--nav-bg-deep) !important;
+}
+.bg-accent {
+  background-color: var(--accent) !important;
+}
+.bg-primary-soft {
+  background-color: var(--primary-soft) !important;
+}
+.bg-success-soft {
+  background-color: var(--success-soft) !important;
+}
+.bg-warning-soft {
+  background-color: var(--warning-soft) !important;
+}
+.bg-danger-soft {
+  background-color: var(--danger-soft) !important;
+}
+.bg-info-soft {
+  background-color: var(--info-soft) !important;
+}
+.bg-cat-brand {
+  background-color: var(--cat-brand) !important;
+}
+.bg-cat-violet {
+  background-color: var(--cat-violet) !important;
+}
+.bg-cat-blue {
+  background-color: var(--cat-blue) !important;
+}
+.bg-cat-cyan {
+  background-color: var(--cat-cyan) !important;
+}
+.bg-cat-emerald {
+  background-color: var(--cat-emerald) !important;
+}
+.bg-cat-amber {
+  background-color: var(--cat-amber) !important;
+}
+.bg-cat-orange {
+  background-color: var(--cat-orange) !important;
+}
+.bg-cat-rose {
+  background-color: var(--cat-rose) !important;
+}
+.bg-cat-red {
+  background-color: var(--cat-red) !important;
+}
+.bg-cat-magenta {
+  background-color: var(--cat-magenta) !important;
+}
+.bg-cat-lime {
+  background-color: var(--cat-lime) !important;
+}
+.bg-cat-slate {
+  background-color: var(--cat-slate) !important;
+}
+.bg-cat-neutral {
+  background-color: var(--cat-neutral) !important;
+}
+
+/* Category hue carrier. Sets --cat so a component can tint ITSELF from one of
+   the palette hues — the counterpart to .text-cat-* / .bg-cat-*, which paint a
+   single property each. Because the hue arrives as a token rather than a value,
+   anything wearing one of these re-tints on its own when the customizer
+   switches preset or mode. */
+.cat-brand {
+  --cat: var(--cat-brand);
+}
+.cat-violet {
+  --cat: var(--cat-violet);
+}
+.cat-blue {
+  --cat: var(--cat-blue);
+}
+.cat-cyan {
+  --cat: var(--cat-cyan);
+}
+.cat-emerald {
+  --cat: var(--cat-emerald);
+}
+.cat-amber {
+  --cat: var(--cat-amber);
+}
+.cat-rose {
+  --cat: var(--cat-rose);
+}
+.cat-slate {
+  --cat: var(--cat-slate);
+}
+
+/* Colour FILLS — deep members of the .bg-cat-* hues, for solid tiles that carry
+   their own copy. Mixing each hue toward black keeps the family recognisable
+   while clearing 4.5:1, and tracks light/dark since the --cat-* tokens do. */
+.bg-fill-blue {
+  background-color: color-mix(
+    in srgb,
+    var(--cat-blue) var(--fill-depth),
+    #000
+  ) !important;
+}
+.bg-fill-violet {
+  background-color: color-mix(
+    in srgb,
+    var(--cat-violet) var(--fill-depth),
+    #000
+  ) !important;
+}
+.bg-fill-rose {
+  background-color: color-mix(
+    in srgb,
+    var(--cat-rose) var(--fill-depth),
+    #000
+  ) !important;
+}
+.bg-fill-emerald {
+  background-color: color-mix(
+    in srgb,
+    var(--cat-emerald) var(--fill-depth),
+    #000
+  ) !important;
+}
+.bg-fill-magenta {
+  background-color: color-mix(
+    in srgb,
+    var(--cat-magenta) var(--fill-depth),
+    #000
+  ) !important;
+}
+.bg-fill-amber {
+  background-color: color-mix(
+    in srgb,
+    var(--cat-amber) var(--fill-depth),
+    #000
+  ) !important;
+}
+
+/* Soft wash fills for stat / KPI cards (tokens in themes.css §3) */
+.bg-wash-rose {
+  background: var(--wash-rose) !important;
+}
+.bg-wash-emerald {
+  background: var(--wash-emerald) !important;
+}
+.bg-wash-amber {
+  background: var(--wash-amber) !important;
+}
+.bg-wash-blue {
+  background: var(--wash-blue) !important;
+}
+.bg-wash-violet {
+  background: var(--wash-violet) !important;
+}
+.bg-wash-indigo {
+  background: var(--wash-indigo) !important;
+}
+.bg-wash-brand {
+  background: var(--wash-brand) !important;
+}
+.bg-wash-nav {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--nav-bg) var(--wash-1), transparent),
+    transparent
+  ) !important;
+}
+[dir="rtl"] .bg-wash-nav {
+  background: linear-gradient(
+    270deg,
+    color-mix(in srgb, var(--nav-bg) var(--wash-1), transparent),
+    transparent
+  ) !important;
+}
+/* Wash mixed from the element's own ink, so one class tints to whatever hue
+   the tile already carries. */
+.bg-wash-current {
+  background: linear-gradient(
+    247deg,
+    color-mix(in srgb, currentColor var(--wash-1), var(--surface-plain)),
+    color-mix(in srgb, currentColor var(--wash-0), var(--surface-plain))
+  ) !important;
+}
+[dir="rtl"] .bg-wash-current {
+  background: linear-gradient(
+    113deg,
+    color-mix(in srgb, currentColor var(--wash-1), var(--surface-plain)),
+    color-mix(in srgb, currentColor var(--wash-0), var(--surface-plain))
+  ) !important;
+}
+
+.bg-pastel-amber {
+  background: var(--pastel-amber) !important;
+}
+.bg-pastel-rose {
+  background: var(--pastel-rose) !important;
+}
+.bg-pastel-cyan {
+  background: var(--pastel-cyan) !important;
+}
+.bg-pastel-emerald {
+  background: var(--pastel-emerald) !important;
+}
+
+.bg-hero-gradient {
+  background: var(--hero-gradient) !important;
+}
+.bg-grad-1 {
+  background: var(--grad-1) !important;
+}
+.bg-grad-2 {
+  background: var(--grad-2) !important;
+}
+.bg-grad-3 {
+  background: var(--grad-3) !important;
+}
+.bg-grad-4 {
+  background: var(--grad-4) !important;
+}
+.bg-grad-5 {
+  background: var(--grad-5) !important;
+}
+.bg-grad-6 {
+  background: var(--grad-6) !important;
+}
+.bg-grad-slate {
+  background: var(--grad-slate) !important;
+}
+.bg-grad-indigo {
+  background: var(--grad-indigo) !important;
+}
+.bg-grad-crimson {
+  background: var(--grad-crimson) !important;
+}
+.bg-grad-orchid {
+  background: var(--grad-orchid) !important;
+}
+.bg-grad-azure {
+  background: var(--grad-azure) !important;
+}
+.bg-grad-bronze {
+  background: var(--grad-bronze) !important;
+}
+.bg-grad-theme {
+  background: var(--grad-theme) !important;
+}
+.bg-sheen-down {
+  background: linear-gradient(
+    180deg,
+    var(--surface-muted),
+    transparent
+  ) !important;
+}
+/* Two-stop ramp between any pair of the categorical hues */
+.bg-grad-cat {
+  background-image: linear-gradient(
+    to right,
+    var(--grad-from, var(--cat-violet)),
+    var(--grad-to, var(--cat-blue))
+  );
+}
+[dir="rtl"] .bg-grad-cat {
+  background-image: linear-gradient(
+    to left,
+    var(--grad-from, var(--cat-violet)),
+    var(--grad-to, var(--cat-blue))
+  );
+}
+.from-cat-violet {
+  --grad-from: var(--cat-violet);
+}
+.from-cat-blue {
+  --grad-from: var(--cat-blue);
+}
+.from-cat-emerald {
+  --grad-from: var(--cat-emerald);
+}
+.from-cat-amber {
+  --grad-from: var(--cat-amber);
+}
+.from-cat-orange {
+  --grad-from: var(--cat-orange);
+}
+.to-cat-violet {
+  --grad-to: var(--cat-violet);
+}
+.to-cat-blue {
+  --grad-to: var(--cat-blue);
+}
+.to-cat-emerald {
+  --grad-to: var(--cat-emerald);
+}
+.to-cat-amber {
+  --grad-to: var(--cat-amber);
+}
+.to-cat-orange {
+  --grad-to: var(--cat-orange);
+}
+
+.border-theme {
+  border: 1px solid var(--border-color);
+}
+.border-soft {
+  border: 1px solid var(--border-soft);
+}
+.border-b-soft {
+  border-bottom: 1px solid var(--border-soft);
+}
+.border-t-soft {
+  border-top: 1px solid var(--border-soft);
+}
+.border-e-soft {
+  border-inline-end: 1px solid var(--border-soft);
+}
+.border-current {
+  border: 1px solid currentColor;
+}
+.border-dashed {
+  border-style: dashed !important;
+}
+.border-plain {
+  border-color: var(--surface-plain) !important;
+}
+.radius-sm {
+  border-radius: var(--radius-1) !important;
+}
+.radius-md {
+  border-radius: var(--radius-2);
+}
+.radius-lg {
+  border-radius: var(--radius-3);
+}
+.radius-xl {
+  border-radius: var(--radius-4);
+}
+
+/* ============================================================
+   5. SURFACES & EFFECTS
+   ============================================================ */
+.bg-glass {
+  background: var(--surface) !important;
+  backdrop-filter: blur(2px);
+}
+/* A blurred backdrop is a containing block for its position:fixed children,
+   which would trap an open [data-dd-fixed] menu inside the card. */
+.bg-glass:has([data-dd-fixed]) {
+  backdrop-filter: none;
+}
+.border-glass {
+  border: 1px solid var(--border-color);
+}
+
+.on-dark {
+  --surface: rgba(253, 253, 255, 0.03);
+  --surface-plain: rgba(253, 253, 255, 0.03);
+  --surface-soft: rgba(255, 255, 255, 0.07);
+  --surface-muted: rgba(255, 255, 255, 0.12);
+  --border-color: rgba(219, 219, 255, 0.14);
+  --border-soft: rgba(219, 219, 255, 0.08);
+  --track-bg: rgba(255, 255, 255, 0.14);
+  --text-title: #ffffff;
+  --text-primary: #eef3f7;
+  --text-secondary: #c8c8c8;
+  --text-muted: rgba(255, 255, 255, 0.55);
+  color: var(--text-secondary);
+}
+
+.transition-base {
+  transition: var(--transition);
+}
+.hover-surface:hover {
+  background-color: var(--surface-muted);
+  color: var(--text-title);
+}
+.hover-primary-soft:hover {
+  background-color: var(--primary-soft);
+  color: var(--primary-ink);
+  border-color: var(--primary-soft-2);
+}
+.hover-danger:hover {
+  background-color: var(--danger-soft);
+  color: var(--danger);
+}
+.hover-lift {
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-2);
+}
+.ring-primary {
+  border: 2px solid var(--primary);
+}
+
+.tile-soft {
+  background-color: var(--surface-soft);
+  color: var(--text-title);
+}
+.tile-soft:hover,
+.tile-soft:focus-visible {
+  background-color: var(--surface-muted);
+}
+.tile-plain {
+  background-color: var(--surface-plain);
+  color: var(--text-title);
+}
+.tile-plain:hover,
+.tile-plain:focus-visible {
+  background-color: var(--surface-soft);
+}
+
+.blend-luminosity {
+  mix-blend-mode: luminosity;
+}
+.corner-orb {
+  inset-block-start: -5rem;
+  inset-inline-end: -5rem;
+  display: grid;
+  place-items: center;
+  width: 13rem;
+  height: 13rem;
+  padding-block: 5rem 1.5rem;
+  padding-inline: 0.75rem 5rem;
+  background: color-mix(in srgb, currentColor 30%, var(--surface-plain));
+}
+.corner-tag {
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  border-start-start-radius: 0;
+  border-start-end-radius: var(--radius-3);
+  border-end-end-radius: 0;
+  border-end-start-radius: var(--radius-3);
+}
+.accent-edge-b {
+  --accent-edge-radius: var(--bs-card-inner-border-radius, var(--radius-3));
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 4px;
+  border-end-start-radius: var(--accent-edge-radius);
+  border-end-end-radius: var(--accent-edge-radius);
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, currentColor 22%, transparent),
+    transparent
+  );
+  pointer-events: none;
+}
+[dir="rtl"] .accent-edge-b {
+  background: linear-gradient(
+    to left,
+    color-mix(in srgb, currentColor 22%, transparent),
+    transparent
+  );
+}
+.accent-edge-b.accent-edge-b-flat {
+  height: 2px;
+  background: currentColor;
+}
+.divider-fade {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-color),
+    transparent
+  );
+}
+.rule-label {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+.rule-label::before,
+.rule-label::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+.min-h-0 {
+  min-height: 0;
+}
+.mw-fit {
+  max-width: fit-content;
+}
+.min-h-dvh {
+  min-height: 100dvh !important;
+}
+/* The fixed-height member of the pair, for a shell that must be EXACTLY the
+   viewport so a panel inside it scrolls rather than the page. Write
+   `vh-100 h-dvh` so a browser without `dvh` keeps the older behaviour. */
+.h-dvh {
+  height: 100dvh !important;
+}
+.measure-sm {
+  max-width: 27rem;
+}
+.measure-lg {
+  max-width: 34rem;
+}
+.figure-col {
+  flex-shrink: 0;
+}
+[dir="rtl"] .flip-rtl {
+  transform: scaleX(-1);
+}
+
+/* ============================================================
+   6. SCROLLBARS & SCROLL RAILS
+   ============================================================ */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-pill);
+}
+
+.scroll-row {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+}
+.scroll-row > * {
+  scroll-snap-align: start;
+}
+.scrollbar-none,
+.scroll-row {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar,
+.scroll-row::-webkit-scrollbar {
+  display: none;
+}
+.scroll-row.is-scrollable {
+  cursor: grab;
+}
+.scroll-row.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+.scroll-row.is-dragging * {
+  pointer-events: none;
+}
+
+/* Fade + arrows for a horizontally scrolled rail */
+[data-scroll-rail]::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  z-index: 1;
+  width: clamp(2.5rem, 7vw, 6rem);
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--bg-app) 95%, transparent)
+  );
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+[dir="rtl"] [data-scroll-rail]::after {
+  background: linear-gradient(
+    to left,
+    transparent,
+    color-mix(in srgb, var(--bg-app) 95%, transparent)
+  );
+}
+[data-scroll-rail].is-rail-end::after {
+  opacity: 0;
+}
+.scroll-nav {
+  box-shadow:
+    0 0 0 0.5rem color-mix(in srgb, var(--bg-app) 55%, transparent),
+    var(--shadow-2);
+  transition: opacity var(--transition);
+}
+.scroll-nav:disabled {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.scroll-col {
+  flex: 1 0 17rem;
+}
+.scroll-col-lg {
+  flex-basis: 21rem;
+}
+.scroll-col-sm {
+  flex: 1 0 11rem;
+}
+.scroll-col-xs {
+  flex: 1 0 6rem;
+}
+
+/* ============================================================
+   7. ICONS & MEDIA
+   Lucide renders inline <svg>; these only set the box.
+   ============================================================ */
+.icon-12 svg,
+svg.icon-12 {
+  width: 12px;
+  height: 12px;
+}
+.icon-14 svg,
+svg.icon-14 {
+  width: 14px;
+  height: 14px;
+}
+.icon-16 svg,
+svg.icon-16 {
+  width: 16px;
+  height: 16px;
+}
+.icon-18 svg,
+svg.icon-18 {
+  width: 18px;
+  height: 18px;
+}
+.icon-20 svg,
+svg.icon-20 {
+  width: 20px;
+  height: 20px;
+}
+.icon-24 svg,
+svg.icon-24 {
+  width: 24px;
+  height: 24px;
+}
+.icon-fill,
+.icon-fill svg {
+  fill: currentColor;
+}
+.fill-primary {
+  fill: var(--primary);
+}
+.fill-secondary {
+  fill: var(--secondary);
+}
+.fill-nav {
+  fill: var(--nav-bg);
+}
+
+.icon-box {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: var(--radius-2);
+}
+.icon-box svg {
+  width: 20px;
+  height: 20px;
+}
+.icon-box-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-1);
+}
+.icon-box-sm svg {
+  width: 17px;
+  height: 17px;
+}
+.icon-box-lg {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-3);
+}
+.icon-box-lg svg {
+  width: 22px;
+  height: 22px;
+}
+.icon-box-xl {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-4);
+}
+.icon-box-xl svg {
+  width: 28px;
+  height: 28px;
+}
+
+.brand-logo {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+}
+.brand-logo-sm {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.brand-logo-lg {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.brand-art {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+/* Flat single-ink artwork: --art-invert flips it for dark mode */
+.orb-art {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  filter: invert(var(--art-invert));
+}
+.flag {
+  display: block;
+  width: 1.4375rem;
+  height: 0.875rem;
+  object-fit: contain;
+}
+.card-art {
+  inset-inline-end: -1rem;
+  width: 8.75rem;
+  max-width: 50%;
+  rotate: 16deg;
+}
+[dir="rtl"] .card-art {
+  rotate: -16deg;
+  scale: -1 1;
+}
+.card-watermark {
+  inset-inline-end: -0.5rem;
+  width: 8.5rem;
+  max-width: 50%;
+  mix-blend-mode: difference;
+}
+[dir="rtl"] .card-watermark {
+  scale: -1 1;
+}
+.tile-art {
+  flex-shrink: 0;
+  width: 7rem;
+  max-width: 32%;
+  height: auto;
+}
+.media-scrim {
+  background-image: var(--media-scrim);
+  pointer-events: none;
+}
+
+/* ============================================================
+   8. APP SHELL
+   ============================================================ */
+.app-sidebar {
+  position: fixed;
+  inset-block: 0;
+  height: 100dvh;
+  inset-inline-start: var(--shell-gutter);
+  z-index: 1040;
+  width: var(--sidebar-w);
+  background: var(--nav-bg);
+  transition:
+    inset-inline-start var(--transition),
+    transform var(--transition),
+    width var(--transition);
+}
+.app-main {
+  margin-inline-start: calc(var(--shell-gutter) + var(--sidebar-w));
+  margin-inline-end: var(--shell-gutter);
+  height: 100vh;
+  min-height: 0;
+  background: var(--bg-app);
+  transition: margin var(--transition);
+}
+/* The content pad is published as a variable because .app-content is also the
+   scroll container: anything that has to span its gutters (see .sticky-toolbar)
+   needs the value, and it changes at three breakpoints. */
+.app-content {
+  --content-pad: 1.25rem;
+  min-height: 0;
+  padding: var(--content-pad);
+}
+.app-footer {
+  border-top: 1px solid var(--border-soft);
+}
+.sidebar-backdrop {
+  display: none;
+}
+/* Bleeds a sticky bar over .app-content's own padding box */
+.sticky-toolbar {
+  top: calc(-1 * var(--content-pad));
+  margin-top: calc(-1 * var(--content-pad));
+  padding-top: var(--content-pad);
+}
+
+/* Collapsed = nav panel hidden, icon rail only */
+.sidebar-collapsed .app-sidebar {
+  width: var(--rail-w);
+}
+.sidebar-collapsed .sidebar-panel {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.sidebar-collapsed .app-main {
+  margin-inline-start: calc(var(--shell-gutter) + var(--rail-w));
+}
+.icon-btn.header-expand {
+  display: none;
+}
+.sidebar-collapsed .icon-btn.header-expand {
+  display: inline-flex;
+}
+
+/* No transitions until the shell has read its saved state */
+[data-booting] .sidebar-link,
+[data-booting] .sidebar-caret,
+[data-booting] .rail-btn,
+[data-booting] .app-topnav a {
+  transition: none !important;
+}
+
+/* ============================================================
+   9. SIDEBAR — level 1 icon rail + level 2 nav panel
+   ============================================================ */
+.sidebar-rail {
+  width: var(--rail-w);
+  position: relative;
+  --rail-logo-box: 46px;
+}
+.sidebar-rail::after {
+  content: "";
+  flex: 0 100 var(--rail-logo-box);
+}
+.rail-shape {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 640px;
+  height: var(--rail-w);
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(-1);
+  background: var(--primary);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20preserveAspectRatio='none'%20overflow='visible'%20width='467'%20height='86'%20viewBox='0%200%20467%2086'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20d='M466.961%2085.9937L466.949%2085.9907C466.822%2085.9633%20466.466%2085.8903%20465.917%2085.7478C465.847%2085.7297%20465.775%2085.7081%20465.7%2085.69C464.571%2085.383%20462.761%2084.8153%20460.519%2083.8435C450.656%2079.577%20432.385%2067.5155%20426.317%2035.548C419.33%20-1.27808%20408.57%20-0.728098%20392.022%200.310279C388.531%200.528752%20384.781%200.768732%20380.756%200.683536H235.527H231.474H86.2438C82.2189%200.768732%2078.4685%200.528752%2074.9779%200.310279C58.4292%20-0.728098%2047.6704%20-1.27808%2040.6825%2035.548C34.6152%2067.5155%2016.3434%2079.5774%206.48045%2083.8435C4.23859%2084.8153%202.42834%2085.383%201.30029%2085.69C1.22486%2085.7081%201.15236%2085.7292%201.08322%2085.7478C0.534278%2085.8903%200.178092%2085.9633%200.0515423%2085.9907L0.0393937%2085.9937C0.0121561%2085.9966%200%2086%200%2086H231.473H235.527H467C467%2086%20466.988%2085.9966%20466.961%2085.9937Z'%20fill='%231CCBE5'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-image: url("data:image/svg+xml,%3Csvg%20preserveAspectRatio='none'%20overflow='visible'%20width='467'%20height='86'%20viewBox='0%200%20467%2086'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20d='M466.961%2085.9937L466.949%2085.9907C466.822%2085.9633%20466.466%2085.8903%20465.917%2085.7478C465.847%2085.7297%20465.775%2085.7081%20465.7%2085.69C464.571%2085.383%20462.761%2084.8153%20460.519%2083.8435C450.656%2079.577%20432.385%2067.5155%20426.317%2035.548C419.33%20-1.27808%20408.57%20-0.728098%20392.022%200.310279C388.531%200.528752%20384.781%200.768732%20380.756%200.683536H235.527H231.474H86.2438C82.2189%200.768732%2078.4685%200.528752%2074.9779%200.310279C58.4292%20-0.728098%2047.6704%20-1.27808%2040.6825%2035.548C34.6152%2067.5155%2016.3434%2079.5774%206.48045%2083.8435C4.23859%2084.8153%202.42834%2085.383%201.30029%2085.69C1.22486%2085.7081%201.15236%2085.7292%201.08322%2085.7478C0.534278%2085.8903%200.178092%2085.9633%200.0515423%2085.9907L0.0393937%2085.9937C0.0121561%2085.9966%200%2086%200%2086H231.473H235.527H467C467%2086%20466.988%2085.9966%20466.961%2085.9937Z'%20fill='%231CCBE5'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% 100%;
+  pointer-events: none;
+}
+[dir="rtl"] .rail-shape {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+.sidebar-rail .logo-rail {
+  padding-top: 10px;
+}
+.rail-logo {
+  width: 46px;
+  height: 36px;
+}
+.rail-btn {
+  width: 45px;
+  height: 45px;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: #fff;
+  background: var(--rail-btn-bg);
+  box-shadow: var(--shadow-1);
+}
+.rail-btn svg {
+  width: 22px;
+  height: 22px;
+}
+.rail-btn:hover {
+  background: var(--nav-bg-soft);
+}
+.rail-btn.active {
+  background: var(--nav-bg);
+  color: var(--secondary);
+}
+.rail-btn.danger {
+  color: #ffb4b4;
+}
+.rail-btn:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: -2px;
+}
+
+.sidebar-panel {
+  width: var(--panel-w);
+  flex: 0 0 var(--panel-w);
+  transition:
+    width var(--transition),
+    opacity var(--transition);
+}
+.app-brand .brand-name {
+  display: block;
+}
+.brand-collapse {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--nav-bg-soft);
+  transition: var(--transition);
+}
+.brand-collapse:hover {
+  background: var(--primary);
+  color: var(--text-on-primary);
+}
+.brand-collapse svg {
+  width: 20px;
+  height: 20px;
+}
+
+.app-sidebar .scrollbar-thin {
+  scrollbar-color: color-mix(in srgb, var(--primary) 55%, transparent)
+    rgba(242, 242, 242, 0.26);
+}
+.app-sidebar .scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.app-sidebar .scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(242, 242, 242, 0.26);
+  border-radius: var(--radius-pill);
+}
+.app-sidebar .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--primary) 55%, transparent);
+}
+
+.sidebar-nav {
+  display: none;
+}
+.sidebar-nav.is-active {
+  display: block;
+}
+.nav-section-title {
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+}
+.sidebar-link {
+  padding: 0.6875rem 1rem;
+  border-radius: var(--radius-pill);
+  color: rgba(255, 255, 255, 0.92);
+}
+.sidebar-link svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+.sidebar-link.active {
+  background: var(--secondary);
+  color: var(--nav-bg);
+}
+.sidebar-caret {
+  transition: transform var(--transition);
+}
+.sidebar-parent[aria-expanded="true"] .sidebar-caret {
+  transform: rotate(90deg);
+}
+[dir="rtl"] .sidebar-caret {
+  transform: scaleX(-1);
+}
+[dir="rtl"] .sidebar-parent[aria-expanded="true"] .sidebar-caret {
+  transform: rotate(90deg);
+}
+.sidebar-parent.menu-open {
+  color: var(--secondary);
+}
+.sidebar-submenu .sidebar-child {
+  padding-inline-start: 2.75rem;
+  font-size: var(--fs-lg);
+}
+
+/* Promo card pinned to the panel foot */
+.promo-card {
+  background: var(--promo-gradient);
+  border-radius: var(--radius-4) 3.75rem 3.75rem var(--radius-4);
+}
+[dir="rtl"] .promo-card {
+  border-radius: 3.75rem var(--radius-4) var(--radius-4) 3.75rem;
+}
+.promo-rocket {
+  width: 69px;
+  height: 75px;
+  flex-shrink: 0;
+}
+
+/* Flyout menu shown from the collapsed rail */
+.sidebar-flyout {
+  position: fixed;
+  z-index: 1045;
+  min-width: var(--panel-w);
+  max-width: min(320px, 80vw);
+  max-height: calc(100vh - 1rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background: var(--nav-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-3);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-6px);
+  transition:
+    opacity var(--transition),
+    transform var(--transition),
+    visibility var(--transition);
+}
+[dir="rtl"] .sidebar-flyout {
+  transform: translateX(6px);
+}
+.sidebar-flyout.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+}
+.sidebar-flyout-title {
+  margin: 0;
+  padding: 0.25rem 0.75rem 0.5rem;
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+.sidebar-flyout .sidebar-nav {
+  display: block;
+  padding: 0;
+}
+.sidebar-flyout .sidebar-submenu {
+  display: block;
+}
+.sidebar-flyout .sidebar-link:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: -2px;
+}
+
+/* ============================================================
+   10. HEADER & TOP NAVIGATION
+   ============================================================ */
+.app-header {
+  height: var(--header-h);
+  z-index: 1030;
+  background: var(--nav-bg);
+}
+.header-search {
+  position: relative;
+  flex: 1 1 330px;
+  max-width: 330px;
+}
+.header-search svg {
+  position: absolute;
+  inset-inline-start: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+}
+.header-search input {
+  width: 100%;
+  height: 50px;
+  padding-block: 0;
+  padding-inline: 3rem 3.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  background: var(--surface-soft);
+  color: var(--text-title);
+  font-size: var(--fs-lg);
+}
+.header-search input::placeholder {
+  color: var(--text-muted);
+}
+.header-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--focus-shadow);
+}
+.header-search kbd {
+  position: absolute;
+  inset-inline-end: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-base);
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  background: var(--surface-muted);
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.5rem;
+}
+.icon-btn {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: var(--surface-soft);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+/* Worn by a <button>. Deliberately not the .bg-transparent utility: that fill
+   is !important and would beat the :hover background below. */
+.header-user {
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+}
+.header-user:hover {
+  background: var(--surface-soft);
+}
+
+.app-topnav {
+  display: none;
+}
+[data-layout="horizontal"] .app-topnav,
+[data-layout="hybrid"] .app-topnav {
+  display: flex;
+  overflow-x: auto;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1025;
+}
+.app-topnav a {
+  color: var(--text-secondary);
+}
+.app-topnav a svg {
+  width: 18px;
+  height: 18px;
+}
+.app-topnav a.active {
+  background: var(--primary);
+  color: var(--text-on-primary);
+}
+
+/* ============================================================
+   11. LAYOUT MODES  (customizer: layout / sidebar style / container)
+   Equal specificity with the shell rules above, so this block must stay after
+   section 8.
+   ============================================================ */
+[data-layout="horizontal"] .sidebar-panel,
+[data-layout="compact"] .sidebar-panel,
+[data-sidebar="icon"] .sidebar-panel {
+  display: none !important;
+}
+[data-layout="horizontal"] .app-sidebar,
+[data-layout="compact"] .app-sidebar,
+[data-sidebar="icon"] .app-sidebar {
+  width: var(--rail-w);
+}
+[data-layout="horizontal"] .app-main,
+[data-layout="compact"] .app-main,
+[data-sidebar="icon"] .app-main {
+  margin-inline-start: calc(var(--shell-gutter) + var(--rail-w));
+}
+[data-sidebar="compact"] {
+  --panel-w: 224px;
+}
+[data-sidebar="compact"] .sidebar-link {
+  padding: 0.5rem 0.75rem;
+  font-size: var(--fs-lg);
+}
+[data-sidebar="compact"] .sidebar-link svg {
+  width: 19px;
+  height: 19px;
+}
+[data-sidebar="floating"] .app-sidebar {
+  inset-block: 0.75rem;
+  inset-inline-start: calc(var(--shell-gutter) + 0.75rem);
+  border-radius: var(--radius-5);
+  overflow: hidden;
+  box-shadow: var(--shadow-3);
+}
+[data-sidebar="floating"] .app-main {
+  margin-inline-start: calc(var(--shell-gutter) + var(--sidebar-w) + 1.5rem);
+}
+[data-layout="horizontal"][data-sidebar="floating"] .app-main,
+[data-layout="compact"][data-sidebar="floating"] .app-main,
+[data-sidebar="floating"][data-sidebar="icon"] .app-main,
+.sidebar-collapsed[data-sidebar="floating"] .app-main {
+  margin-inline-start: calc(var(--shell-gutter) + var(--rail-w) + 1.5rem);
+}
+
+/* ============================================================
+   12. BUTTONS
+   ============================================================ */
+.btn {
+  --bs-btn-border-radius: var(--radius-pill);
+  --bs-btn-font-weight: 500;
+  --bs-btn-padding-x: 1.25rem;
+  --bs-btn-padding-y: 0.625rem;
+}
+.btn-primary {
+  --bs-btn-color: var(--text-on-primary);
+  --bs-btn-bg: var(--primary);
+  --bs-btn-border-color: var(--primary);
+  --bs-btn-hover-color: var(--text-on-primary);
+  --bs-btn-hover-bg: var(--primary-hover);
+  --bs-btn-hover-border-color: var(--primary-hover);
+  --bs-btn-active-color: var(--text-on-primary);
+  --bs-btn-active-bg: var(--primary-active);
+  --bs-btn-active-border-color: var(--primary-active);
+  --bs-btn-disabled-bg: var(--primary);
+  --bs-btn-disabled-border-color: var(--primary);
+}
+.btn-primary-soft {
+  --bs-btn-color: var(--primary-ink);
+  --bs-btn-bg: var(--primary-soft);
+  --bs-btn-border-color: var(--primary-soft);
+  --bs-btn-hover-color: var(--text-on-primary);
+  --bs-btn-hover-bg: var(--primary);
+  --bs-btn-hover-border-color: var(--primary);
+  --bs-btn-active-color: var(--text-on-primary);
+  --bs-btn-active-bg: var(--primary-active);
+  --bs-btn-active-border-color: var(--primary-active);
+}
+.btn-accent {
+  --bs-btn-color: var(--nav-bg);
+  --bs-btn-bg: var(--secondary);
+  --bs-btn-border-color: var(--secondary);
+  --bs-btn-hover-color: var(--nav-bg);
+  --bs-btn-hover-bg: var(--primary);
+  --bs-btn-hover-border-color: var(--primary);
+  --bs-btn-active-color: var(--nav-bg);
+  --bs-btn-active-bg: var(--primary-active);
+  --bs-btn-active-border-color: var(--primary-active);
+}
+.btn-accent-soft {
+  --bs-btn-color: var(--nav-bg);
+  --bs-btn-bg: var(--accent);
+  --bs-btn-border-color: var(--accent);
+  --bs-btn-hover-color: var(--nav-bg);
+  --bs-btn-hover-bg: var(--primary);
+  --bs-btn-hover-border-color: var(--primary);
+  --bs-btn-active-color: var(--nav-bg);
+  --bs-btn-active-bg: var(--primary-active);
+  --bs-btn-active-border-color: var(--primary-active);
+}
+.btn-accent-ghost {
+  --bs-btn-color: var(--secondary);
+  --bs-btn-bg: var(--surface-soft);
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-color: var(--nav-bg);
+  --bs-btn-hover-bg: var(--secondary);
+  --bs-btn-hover-border-color: var(--secondary);
+  --bs-btn-active-color: var(--nav-bg);
+  --bs-btn-active-bg: var(--primary-active);
+  --bs-btn-active-border-color: var(--primary-active);
+}
+.btn-outline-soft {
+  --bs-btn-color: var(--text-secondary);
+  --bs-btn-bg: var(--surface);
+  --bs-btn-border-color: var(--border-color);
+  --bs-btn-hover-color: var(--text-title);
+  --bs-btn-hover-bg: var(--surface-muted);
+  --bs-btn-hover-border-color: var(--border-color);
+  --bs-btn-active-color: var(--text-title);
+  --bs-btn-active-bg: var(--surface-muted);
+  --bs-btn-active-border-color: var(--border-color);
+}
+.btn-ghost {
+  --bs-btn-color: var(--text-secondary);
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-color: var(--text-title);
+  --bs-btn-hover-bg: var(--surface-muted);
+  --bs-btn-hover-border-color: transparent;
+}
+.btn-success {
+  --bs-btn-bg: var(--success);
+  --bs-btn-border-color: var(--success);
+  --bs-btn-hover-bg: var(--success-strong);
+  --bs-btn-hover-border-color: var(--success-strong);
+  --bs-btn-active-bg: var(--success-strong);
+  --bs-btn-active-border-color: var(--success-strong);
+  --bs-btn-disabled-bg: var(--success);
+  --bs-btn-disabled-border-color: var(--success);
+}
+.btn-danger {
+  --bs-btn-bg: var(--danger);
+  --bs-btn-border-color: var(--danger);
+  --bs-btn-hover-bg: var(--danger-strong);
+  --bs-btn-hover-border-color: var(--danger-strong);
+  --bs-btn-active-bg: var(--danger-strong);
+  --bs-btn-active-border-color: var(--danger-strong);
+}
+/* Square icon-only button (38px). Centred like .icon-btn: with padding zeroed
+   a stock inline-block .btn drops its glyph onto the text baseline, and one
+   carrying a d-*-inline-flex utility gets align-items:stretch instead. */
+.btn-18 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+}
+.btn-18 svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================================
+   13. FORMS
+   ============================================================ */
+.form-control,
+.form-select {
+  background-color: var(--surface-plain);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+  border-radius: var(--radius-pill);
+  padding: 0.625rem 0.875rem;
+}
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--surface-plain);
+  border-color: var(--primary);
+  color: var(--text-primary);
+  box-shadow: var(--focus-shadow);
+}
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+textarea.form-control {
+  border-radius: var(--radius-3);
+}
+/* Composer field that grows with its content (height is set from script) and
+   then scrolls, so a long message never pushes the thread off screen. */
+.textarea-grow {
+  max-height: 8rem;
+  resize: none;
+}
+.input-group-text {
+  border-radius: var(--radius-pill);
+}
+.form-check-input {
+  width: 1.15em;
+  height: 1.15em;
+  background-color: var(--surface-plain);
+  border-color: var(--border-color);
+}
+.form-check-input:checked {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
+.form-check-input:focus {
+  border-color: var(--primary);
+  box-shadow: var(--focus-shadow);
+}
+.check-strike:has(.form-check-input:checked) .form-check-label {
+  color: var(--text-muted) !important;
+  text-decoration: line-through;
+}
+
+/* Icon-led field. The wrapper defeats Bootstrap's sibling selector, so the
+   validation bridge below re-opens .invalid-feedback; the state glyph is
+   dropped because both edges of the field are already spoken for. */
+.field-icon {
+  position: relative;
+}
+.field-icon > i,
+.field-icon > svg {
+  position: absolute;
+  inset-inline-start: 1.125rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.field-icon > .form-control {
+  padding-inline-start: 2.875rem;
+}
+.field-icon > .btn {
+  position: absolute;
+  inset-inline-end: 0.375rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.field-icon:has(> .btn) > .form-control,
+.was-validated .field-icon:has(> .btn) > .form-control {
+  padding-inline-end: 3rem;
+}
+.field-icon > .form-control,
+.was-validated .field-icon > .form-control {
+  background-image: none;
+}
+.was-validated .field-icon:has(> .form-control:invalid) ~ .invalid-feedback,
+.field-icon:has(> .form-control.is-invalid) ~ .invalid-feedback {
+  display: block;
+}
+
+/* ============================================================
+   14. AVATARS, BADGES & TINTS
+   ============================================================ */
+/* The wrapper is the positioning context and must NOT clip: .avatar-status sits
+   on the bottom-inline-end edge. The round crop belongs to the picture itself —
+   .avatar img inherits the wrapper's radius. */
+.avatar {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 600;
+  font-size: var(--fs-md);
+  flex-shrink: 0;
+  overflow: visible;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.avatar-xs {
+  width: 28px;
+  height: 28px;
+  font-size: var(--fs-xs);
+}
+.avatar-sm {
+  width: 34px;
+  height: 34px;
+  font-size: var(--fs-sm);
+}
+.avatar-md {
+  width: 48px;
+  height: 48px;
+  font-size: var(--fs-sm);
+}
+.avatar-lg {
+  width: 56px;
+  height: 56px;
+  font-size: var(--fs-lg);
+}
+.avatar-xl {
+  width: 84px;
+  height: 84px;
+  font-size: var(--fs-base);
+}
+.avatar-2xl {
+  width: 128px;
+  height: 128px;
+  font-size: 2.5rem;
+}
+.avatar-stack {
+  display: inline-flex;
+}
+.avatar-stack > * {
+  border: 2px solid var(--surface-plain);
+}
+.avatar-stack > * + * {
+  margin-inline-start: -10px;
+}
+/* Seated ON the circle's bottom-inline-end edge. The offset is a percentage of
+   the avatar, so the dot lands in the same place on the 28px .avatar-xs and the
+   128px .avatar-2xl. */
+.avatar-status {
+  position: absolute;
+  inset-inline-end: 5%;
+  bottom: 5%;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 2px var(--surface);
+}
+.avatar-status.away {
+  background: var(--warning);
+}
+.avatar-status.offline {
+  background: var(--danger);
+}
+.avatar-status.brand {
+  background: var(--primary);
+}
+
+.badge-soft {
+  display: inline-block;
+  background: var(--primary-soft);
+  color: var(--primary-ink);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+.tint-primary {
+  background: var(--primary-soft);
+  color: var(--primary-ink);
+}
+.tint-success {
+  background: var(--success-soft);
+  color: var(--success-ink);
+}
+.tint-warning {
+  background: var(--warning-soft);
+  color: var(--warning-ink);
+}
+.tint-danger {
+  background: var(--danger-soft);
+  color: var(--danger-ink);
+}
+.tint-info {
+  background: var(--info-soft);
+  color: var(--info-ink);
+}
+.tint-brand {
+  background: color-mix(in srgb, var(--cat-brand) 14%, var(--surface-plain));
+  color: var(--cat-brand);
+}
+.tint-violet {
+  background: color-mix(in srgb, var(--cat-violet) 14%, var(--surface-plain));
+  color: var(--cat-violet);
+}
+.tint-blue {
+  background: color-mix(in srgb, var(--cat-blue) 14%, var(--surface-plain));
+  color: var(--cat-blue);
+}
+.tint-cyan {
+  background: color-mix(in srgb, var(--cat-cyan) 14%, var(--surface-plain));
+  color: var(--cat-cyan);
+}
+.tint-emerald {
+  background: color-mix(in srgb, var(--cat-emerald) 14%, var(--surface-plain));
+  color: var(--cat-emerald);
+}
+.tint-amber {
+  background: color-mix(in srgb, var(--cat-amber) 16%, var(--surface-plain));
+  color: var(--cat-orange);
+}
+.tint-orange {
+  background: color-mix(in srgb, var(--cat-orange) 14%, var(--surface-plain));
+  color: var(--cat-orange);
+}
+.tint-rose {
+  background: color-mix(in srgb, var(--cat-rose) 14%, var(--surface-plain));
+  color: var(--cat-rose);
+}
+.tint-magenta {
+  background: color-mix(in srgb, var(--cat-magenta) 14%, var(--surface-plain));
+  color: var(--cat-magenta);
+}
+.tint-slate {
+  background: color-mix(in srgb, var(--cat-slate) 14%, var(--surface-plain));
+  color: var(--cat-slate);
+}
+
+/* ============================================================
+   15. DROPDOWNS & NOTIFICATIONS
+   ============================================================ */
+.dropdown-menu {
+  --bs-dropdown-bg: var(--surface-plain);
+  --bs-dropdown-color: var(--text-primary);
+  --bs-dropdown-border-color: var(--border-color);
+  --bs-dropdown-border-radius: var(--radius-3);
+  --bs-dropdown-link-color: var(--text-secondary);
+  --bs-dropdown-link-hover-color: var(--text-title);
+  --bs-dropdown-link-hover-bg: var(--surface-muted);
+  --bs-dropdown-link-active-color: var(--text-title);
+  --bs-dropdown-link-active-bg: var(--surface-muted);
+  --bs-dropdown-header-color: var(--text-muted);
+  --bs-dropdown-divider-bg: var(--border-soft);
+  --bs-dropdown-divider-margin-y: 0;
+  box-shadow: var(--shadow-3);
+}
+/* A menu opened from an .on-dark panel still belongs to the page, so it reads
+   the frozen page palette rather than the panel's inverted one. */
+.on-dark .dropdown-menu,
+.on-dark .on-page {
+  --surface: var(--surface-page);
+  --surface-plain: var(--surface-plain-page);
+  --surface-soft: var(--surface-soft-page);
+  --surface-muted: var(--surface-muted-page);
+  --border-color: var(--border-color-page);
+  --border-soft: var(--border-soft-page);
+  --track-bg: var(--track-bg-page);
+  --text-title: var(--text-title-page);
+  --text-primary: var(--text-primary-page);
+  --text-secondary: var(--text-secondary-page);
+  --text-muted: var(--text-muted-page);
+  color: var(--text-secondary);
+}
+.dropdown-menu.show {
+  animation: dd-fade 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: top center;
+}
+@keyframes dd-fade {
+  from {
+    opacity: 0;
+    scale: 0.97;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+/* A card holding an open [data-dd-fixed] menu drops its hover transform: a
+   transformed ancestor becomes the containing block for a fixed child and would
+   clip the menu. !important to beat .hover-lift:hover. */
+.dd-flat {
+  transform: none !important;
+  transition: none;
+}
+/* Capped to the scrolling pane it belongs to — dashboard.js measures the pane
+   and sets --dd-max-h, so a long menu scrolls instead of floating out of it. */
+.dropdown-menu.is-capped {
+  max-height: var(--dd-max-h);
+  overflow-y: auto;
+}
+/* Denser action menu for item tiles and rows, where a full-size menu is taller
+   than the card it belongs to. */
+.dropdown-menu-compact .dropdown-item {
+  padding: 0.375rem 0.5rem;
+  font-size: var(--fs-md);
+}
+.dropdown-menu-compact .dropdown-item svg {
+  width: 16px;
+  height: 16px;
+}
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: var(--radius-1);
+  font-weight: 500;
+  font-size: var(--fs-lg);
+}
+.dropdown-item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+.dropdown-item:hover svg,
+.dropdown-item:focus svg {
+  color: var(--primary);
+}
+.dropdown-item-danger {
+  color: var(--danger);
+}
+.dropdown-item-danger:hover,
+.dropdown-item-danger:focus {
+  background: var(--danger-soft);
+  color: var(--danger-ink);
+}
+.dropdown-item-danger svg {
+  color: inherit;
+}
+.profile-menu,
+.notif-menu {
+  width: min(340px, calc(100vw - 1.5rem));
+  overflow: hidden;
+  border-color: var(--border-soft);
+  box-shadow: var(--shadow-3), var(--shadow-1);
+}
+.dd-caret {
+  transition: transform var(--transition);
+}
+[aria-expanded="true"] .dd-caret {
+  transform: rotate(180deg);
+}
+
+.notif-count {
+  position: absolute;
+  top: -2px;
+  inset-inline-end: -2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 0.3rem;
+  display: grid;
+  place-items: center;
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: var(--danger);
+  border: 2px solid var(--nav-bg);
+  border-radius: var(--radius-pill);
+}
+.notif-body {
+  max-height: min(360px, 60vh);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 calc(100% - 1.5rem),
+    transparent
+  );
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent);
+}
+.notif-list {
+  gap: 0.125rem;
+}
+.notif-item {
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.625rem;
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  transition: background var(--transition);
+}
+.notif-item::before {
+  content: "";
+  position: absolute;
+  inset-block: 0.5rem;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.notif-item.unread::before {
+  opacity: 1;
+}
+.notif-item:hover {
+  background: var(--surface-soft);
+}
+.notif-item.unread {
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+.notif-item.unread:hover {
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+}
+.notif-item:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+.notif-content {
+  gap: 0.15rem;
+  min-width: 0;
+}
+.notif-title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-title);
+}
+.notif-text {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.notif-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.125rem;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.notif-time svg {
+  width: 12px;
+  height: 12px;
+}
+.notif-unread-dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 0.35rem;
+  margin-inline-start: auto;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--primary);
+}
+.notif-item:not(.unread) .notif-unread-dot {
+  visibility: hidden;
+}
+.notif-foot {
+  border-top: 1px solid var(--border-soft);
+}
+.notif-foot a {
+  color: var(--primary-ink);
+  font-size: var(--fs-md);
+  padding: 0.4rem;
+  border-radius: var(--radius-1);
+  transition: background var(--transition);
+}
+.notif-foot a:hover {
+  background: var(--primary-soft);
+}
+.notif-foot a svg {
+  width: 15px;
+  height: 15px;
+}
+.notif-state {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.notif-empty-icon {
+  width: 48px;
+  height: 48px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface-muted);
+  color: var(--text-muted);
+}
+.notif-empty-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.feed-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.feed-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.feed-row {
+  color: inherit;
+  transition: background var(--transition);
+}
+.feed-row:hover {
+  background: var(--surface-soft);
+}
+
+/* ============================================================
+   16. TABLES & PAGINATION
+   ============================================================ */
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text-secondary);
+  --bs-table-border-color: var(--border-soft);
+  --bs-table-hover-bg: var(--surface-soft);
+  --bs-table-hover-color: var(--text-title);
+  vertical-align: middle;
+}
+.table > :not(caption) > * > * {
+  padding: 0.875rem 1rem;
+}
+.table > thead th {
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-bottom: 0;
+}
+.table > thead th:first-child {
+  border-start-start-radius: var(--radius-2);
+  border-end-start-radius: var(--radius-2);
+}
+.table > thead th:last-child {
+  border-start-end-radius: var(--radius-2);
+  border-end-end-radius: var(--radius-2);
+}
+/* Equal specificity with the two .table rules above — must stay after them. */
+.table-sm > :not(caption) > * > * {
+  padding: 0.5rem;
+}
+.table-sm > thead th {
+  font-size: var(--fs-xs);
+}
+.row-selected {
+  --bs-table-color-state: var(--primary-ink);
+  --bs-table-bg-state: var(--primary-soft);
+}
+
+.pagination {
+  --bs-pagination-color: var(--text-secondary);
+  --bs-pagination-bg: var(--surface-plain);
+  --bs-pagination-border-color: var(--border-color);
+  --bs-pagination-hover-color: var(--text-title);
+  --bs-pagination-hover-bg: var(--surface-muted);
+  --bs-pagination-hover-border-color: var(--border-color);
+  --bs-pagination-focus-color: var(--text-title);
+  --bs-pagination-focus-bg: var(--surface-muted);
+  --bs-pagination-focus-box-shadow: var(--focus-shadow);
+  --bs-pagination-active-bg: var(--cat-violet);
+  --bs-pagination-active-border-color: var(--cat-violet);
+  --bs-pagination-active-color: #fff;
+  gap: 0.375rem;
+}
+.page-item:not(:first-child) .page-link {
+  margin-inline-start: 0;
+}
+.page-link {
+  width: 2.125rem;
+  height: 2.125rem;
+  padding: 0;
+  border-radius: var(--radius-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-md);
+}
+.page-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================================
+   17. PROGRESS, METERS & LEGENDS
+   ============================================================ */
+.progress-sm {
+  --bs-progress-height: 0.625rem;
+  --bs-progress-bg: var(--track-bg);
+  --bs-progress-border-radius: var(--radius-pill);
+}
+.progress-lg {
+  --bs-progress-height: 1.125rem;
+  --bs-progress-font-size: var(--fs-xs);
+  --bs-progress-border-radius: var(--radius-1);
+  --bs-progress-bar-color: #fff;
+  font-weight: 500;
+}
+.progress-inline {
+  width: 5rem;
+  flex-shrink: 0;
+}
+.seg-meter {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 3px;
+}
+.seg-meter > * {
+  width: 4px;
+  height: 11px;
+  border-radius: var(--radius-1);
+  background: var(--track-bg);
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.legend-dot-sm {
+  width: 6px;
+  height: 6px;
+}
+.rail-dot {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+/* ============================================================
+   18. CHARTS & MAPS
+   ============================================================ */
+.chart-area {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+/* Plot host for libraries that size themselves FROM the box: Chart.js runs
+   maintainAspectRatio:false and ECharts reads the host height at init, so both
+   draw nothing in an auto-height div. position:relative is also what makes
+   Chart.js's responsive resize work. */
+.chart-canvas {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 260px;
+}
+/* Circular and node-graph plots spend their height on the shape itself, so they
+   read cramped at the default. */
+.chart-canvas-tall {
+  height: 320px;
+}
+.chart-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+.chart-inline {
+  width: 4rem;
+  flex-shrink: 0;
+}
+.chart-inline-lg {
+  width: 7.5rem;
+  flex-shrink: 0;
+}
+/* A card hosting a plot carries the firmer chart edge, so the panel boundary
+   stays readable next to the guide lines inside it. */
+.card:has(.chart-area),
+.card:has(.chart-canvas) {
+  --bs-card-border-color: var(--chart-border);
+}
+.apexcharts-canvas,
+.apexcharts-canvas > svg {
+  max-width: 100% !important;
+}
+.apexcharts-tooltip,
+.apexcharts-tooltip.apexcharts-theme-light,
+.apexcharts-tooltip.apexcharts-theme-dark {
+  background: var(--surface-plain) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-2) !important;
+  box-shadow: var(--shadow-3) !important;
+  color: var(--text-primary) !important;
+}
+.apexcharts-tooltip-title {
+  background: var(--surface-soft) !important;
+  border-bottom: 1px solid var(--border-soft) !important;
+  font-weight: 700 !important;
+  color: var(--text-title) !important;
+}
+
+.map-area {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: clamp(14rem, 26vw, 21rem);
+}
+.jvm-container {
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
+}
+.jvm-tooltip {
+  position: absolute;
+  display: none;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-1);
+  background: var(--surface-plain);
+  box-shadow: var(--shadow-3);
+  color: var(--text-title);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+}
+.jvm-tooltip.active {
+  display: block;
+}
+
+/* ============================================================
+   19. THEME CUSTOMIZER
+   ============================================================ */
+#customizer {
+  --bs-offcanvas-width: 340px;
+}
+.cz-section:last-child {
+  border-bottom: 0;
+}
+.cz-title {
+  letter-spacing: 0.05em;
+}
+.opt-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+.opt-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.opt-tile {
+  border: 1px solid var(--border-color);
+  background: var(--surface-plain);
+  color: var(--text-secondary);
+}
+.opt-tile svg {
+  width: 18px;
+  height: 18px;
+}
+.opt-tile:hover {
+  border-color: var(--primary-soft-2);
+  color: var(--text-title);
+}
+.swatch {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 2px solid transparent;
+  position: relative;
+  cursor: pointer;
+}
+.swatch[data-value="cyan"] {
+  background: #1ccbe5;
+}
+.swatch[data-value="blue"] {
+  background: #2563eb;
+}
+.swatch[data-value="indigo"] {
+  background: #4f46e5;
+}
+.swatch[data-value="emerald"] {
+  background: #059669;
+}
+.swatch[data-value="orange"] {
+  background: #ea580c;
+}
+.swatch[data-value="rose"] {
+  background: #e11d48;
+}
+.swatch.active-tile {
+  border-color: var(--text-title);
+}
+.swatch.active-tile::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: var(--fs-md);
+  font-weight: 700;
+}
+.active-tile {
+  border-color: var(--primary);
+  color: var(--primary-ink);
+  background: var(--primary-soft);
+}
+
+/* ============================================================
+   SECTION STYLES
+   ============================================================ */
+
+/* ============================================================
+   20. TIMELINE
+   ============================================================ */
+.timeline {
+  --timeline-node: 2.5rem; /* .icon-box / .avatar */
+  --timeline-gap: 1rem;
+}
+.timeline-sm {
+  --timeline-node: 2rem; /* .icon-box-sm */
+  --timeline-gap: 0.75rem;
+}
+.timeline-item {
+  position: relative;
+  padding-inline-start: calc(var(--timeline-node) + var(--timeline-gap));
+}
+.timeline-node {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  inset-block: calc(var(--timeline-node) + 0.5rem) 0;
+  inset-inline-start: calc(var(--timeline-node) / 2 - 1px);
+  width: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--border-color);
+}
+/* Nothing left to bridge to — the final entry, and the last one still showing
+   while a filter hides the rest, carry no connector. */
+.timeline-item:not(:has(~ .timeline-item:not(.d-none)))::before {
+  content: none;
+}
+
+/* ============================================================
+   21. STEP FLOW  (wizards, checkout / onboarding rails)
+   ============================================================ */
+.flow-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+.flow-step {
+  --flow-node: 40px;
+  position: relative;
+  flex: 1 0 0;
+  min-width: 0;
+  text-align: center;
+}
+.flow-step:has(.icon-box-lg) {
+  --flow-node: 48px;
+}
+.flow-step + .flow-step::before {
+  content: "";
+  position: absolute;
+  inset-inline-end: 50%;
+  top: calc(var(--flow-node) / 2);
+  width: calc(100% - var(--flow-node));
+  height: 2px;
+  margin-inline-end: calc(var(--flow-node) / 2);
+  background-color: var(--border-color);
+}
+.flow-step.is-done + .flow-step::before,
+.flow-step.is-done::before {
+  background-color: var(--primary);
+}
+
+/* ============================================================
+   22. STAT RAILS
+   ============================================================ */
+.stat-rail {
+  height: clamp(20rem, 30vw, 23rem);
+}
+.stat-rail > * {
+  min-width: 8rem;
+}
+.stat-rail-fill {
+  min-height: 11rem;
+}
+.rail-list > li {
+  position: relative;
+}
+.rail-list > li::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0.4375rem;
+  width: 2px;
+  background: var(--rail-color, var(--primary));
+}
+.rail-list > li:first-child::before {
+  inset-block-start: 50%;
+}
+.rail-list > li:last-child::before {
+  inset-block-end: 50%;
+}
+
+/* ============================================================
+   23. MARQUEE  (ticker strips)
+   ============================================================ */
+.marquee {
+  overflow: hidden;
+}
+.marquee-track {
+  width: max-content;
+  animation: marquee-shift var(--marquee-duration, 40s) linear infinite;
+}
+.marquee.is-paused .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-fade {
+  --marquee-fade-width: 2.5rem;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--marquee-fade-width),
+    #000 calc(100% - var(--marquee-fade-width)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--marquee-fade-width),
+    #000 calc(100% - var(--marquee-fade-width)),
+    transparent
+  );
+}
+/* the track holds exactly two copies, so -50% lands on the seam */
+@keyframes marquee-shift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* RTL lays the copies out to the left of the start edge, so travel reverses */
+[dir="rtl"] .marquee-track {
+  animation-name: marquee-shift-rtl;
+}
+@keyframes marquee-shift-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+
+/* ============================================================
+   24. DRAG & DROP  (Sortable)
+   ============================================================ */
+.drag-item {
+  cursor: grab;
+}
+.drag-item:active {
+  cursor: grabbing;
+}
+/* the gap left at the drop position */
+.drag-ghost {
+  opacity: 0.4;
+}
+/* the item under the pointer, lifted off the column */
+.drag-chosen {
+  box-shadow: var(--shadow-3);
+}
+
+/* ============================================================
+   25. APP WORKSPACE  (chat, email, tasks, file manager)
+   ============================================================ */
+/* A page whose PANES scroll internally instead of the page scrolling. It is a
+   flex child of .app-content, so it takes the height the page has left over;
+   the floor keeps it usable on a short viewport. */
+.app-workspace {
+  min-height: 30rem;
+}
+/* A fixed-width side pane. ONLY the flex basis is set: a pane that is a
+   responsive offcanvas below its breakpoint must keep Bootstrap's drawer width.
+   min-width is what makes the basis binding — otherwise the widest row inside
+   pushes the pane out whenever a filter changes what is on screen. */
+.app-pane {
+  flex: 0 0 var(--pane-w, 17.5rem);
+  min-width: 0;
+}
+.app-pane-lg {
+  --pane-w: 20rem;
+}
+
+/* Selectable list row — the conversation, thread or file open in the pane
+   beside it. Pairs with .transition-base. The resting fill is cleared here
+   rather than with .bg-transparent: that one is !important and would beat the
+   states below. */
+.list-row-select {
+  background-color: transparent;
+  color: var(--text-secondary);
+}
+.list-row-select:hover,
+.list-row-select:focus-visible {
+  background-color: var(--surface-soft);
+  color: var(--text-title);
+}
+.list-row-select.active {
+  background-color: var(--primary-soft);
+  color: var(--primary-ink);
+}
+
+/* Message stream — the row caps the measure so long replies stay readable; the
+   bubble squares off the one corner nearest its author. */
+.msg-row {
+  max-width: min(34rem, 88%);
+}
+.msg-bubble {
+  border-radius: var(--radius-3);
+}
+.msg-in .msg-bubble {
+  border-start-start-radius: var(--radius-1);
+}
+.msg-out .msg-bubble {
+  border-start-end-radius: var(--radius-1);
+}
+
+/* "…is typing" — three dots that ride the bubble's own text colour. */
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes typing-bounce {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* ============================================================
+   PAGE STYLES
+   ============================================================ */
+
+/* ============================================================
+   26. AUTHENTICATION  (login, register, forgot, OTP, lock screen)
+   ============================================================ */
+.panel-aura::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      40rem 28rem at 92% -6%,
+      color-mix(in srgb, var(--secondary) 34%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      36rem 28rem at -6% 106%,
+      color-mix(in srgb, var(--primary) 40%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size:
+    auto,
+    auto,
+    26px 26px;
+}
+/* Decorative only — mirror the whole layer rather than write RTL twins. */
+[dir="rtl"] .panel-aura::before {
+  transform: scaleX(-1);
+}
+/* Same validation bridge as .field-icon (§13), for the OTP code boxes. */
+.was-validated .code-group:has(.form-control:invalid) ~ .invalid-feedback,
+.code-group:has(.form-control.is-invalid) ~ .invalid-feedback {
+  display: block;
+}
+
+/* ============================================================
+   27. CALENDAR  (FullCalendar bridge)
+   FullCalendar 6 is themed through its OWN --fc-* variables, so this points
+   them at the project's tokens: the calendar then follows the six presets,
+   light/dark and the radius scale with no per-rule overrides. They are set on
+   the mount, not :root, so they reach only the calendar. FullCalendar injects
+   its stylesheet BEFORE the first <link> in <head>, so the structural rules
+   below already win on source order at equal specificity.
+   ============================================================ */
+.calendar-surface {
+  --fc-small-font-size: var(--fs-xs);
+  --fc-page-bg-color: var(--surface);
+  --fc-neutral-bg-color: var(--surface-soft);
+  --fc-neutral-text-color: var(--text-muted);
+  --fc-border-color: var(--border-soft);
+  --fc-today-bg-color: var(--primary-soft);
+  --fc-highlight-color: var(--primary-soft-2);
+  --fc-now-indicator-color: var(--danger);
+  --fc-more-link-bg-color: var(--surface-muted);
+  --fc-more-link-text-color: var(--text-title);
+  --fc-list-event-hover-bg-color: var(--surface-soft);
+  --fc-event-selected-overlay-color: var(--primary-soft-2);
+}
+.calendar-surface .fc-event {
+  --fc-event-bg-color: color-mix(
+    in srgb,
+    var(--cat, var(--primary)) 16%,
+    var(--surface-plain)
+  );
+  --fc-event-border-color: var(--cat, var(--primary));
+  --fc-event-text-color: var(--cat, var(--primary));
+  border-radius: var(--radius-1);
+  font-size: var(--fs-xs);
+}
+.calendar-surface .fc-event-title,
+.calendar-surface .fc-event-time {
+  font-weight: 600;
+}
+.calendar-surface .fc-event-time {
+  flex-shrink: 0;
+}
+.calendar-surface .fc-daygrid-event {
+  padding: 0.0625rem 0.25rem;
+}
+.calendar-surface .fc-event-main {
+  overflow: hidden;
+}
+.calendar-surface .fc-theme-standard .fc-scrollgrid {
+  border: 0;
+}
+.calendar-surface .fc-daygrid-day-frame {
+  min-height: 5.5rem;
+}
+.calendar-surface .fc-col-header-cell-cushion,
+.calendar-surface .fc-timegrid-axis-cushion,
+.calendar-surface .fc-timegrid-slot-label-cushion {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.calendar-surface .fc-daygrid-day-number {
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.calendar-surface .fc-day-other .fc-daygrid-day-number {
+  color: var(--text-muted);
+}
+.calendar-surface .fc-daygrid-day.fc-day-today {
+  background-color: transparent;
+}
+.calendar-surface .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border-radius: var(--radius-pill);
+  padding-inline: 0.5rem;
+}
+.calendar-surface .fc-list-day-text,
+.calendar-surface .fc-list-day-side-text {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-title);
+}
+.calendar-surface .fc-list-event-title,
+.calendar-surface .fc-list-event-time {
+  font-size: var(--fs-md);
+}
+.calendar-surface .fc-list-event-title {
+  color: var(--text-title);
+  font-weight: 500;
+}
+.calendar-surface .fc-list,
+.calendar-surface .fc-list-table td {
+  border-color: var(--border-soft);
+}
+
+/* Date-picker sized month grid. Equal specificity with the rules above, so it
+   must stay after them. */
+.calendar-mini {
+  --fc-today-bg-color: transparent;
+}
+.calendar-mini .fc-theme-standard .fc-scrollgrid,
+.calendar-mini .fc-theme-standard td,
+.calendar-mini .fc-theme-standard th {
+  border: 0;
+}
+.calendar-mini .fc-daygrid-day-events,
+.calendar-mini .fc-daygrid-day-bg {
+  display: none;
+}
+.calendar-mini .fc-daygrid-day-frame {
+  min-height: 0;
+}
+.calendar-mini .fc-daygrid-day {
+  cursor: pointer;
+}
+.calendar-mini .fc-col-header-cell-cushion {
+  display: block;
+  padding: 0.25rem 0;
+  text-align: center;
+}
+.calendar-mini .fc-daygrid-day-top {
+  justify-content: center;
+}
+.calendar-mini .fc-daygrid-day-number {
+  min-width: 1.75rem;
+  padding: 0.25rem;
+  text-align: center;
+  border-radius: var(--radius-pill);
+}
+.calendar-mini .fc-daygrid-day:hover .fc-daygrid-day-number {
+  background: var(--surface-muted);
+  color: var(--text-title);
+}
+
+/* ============================================================
+   28. RESPONSIVE
+   Every media query lives here so it always follows the base rule it adjusts.
+   ============================================================ */
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.float-y {
+  animation: floatY 3s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .marquee {
+    overflow-x: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
+@media (min-width: 1600px) {
+  .app-content {
+    --content-pad: 1.75rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .figure-col {
+    width: 6.5rem;
+  }
+}
+
+/* Wide category charts scroll instead of compressing below lg */
+@media (max-width: 991.98px) {
+  .chart-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .chart-scroll > * {
+    min-width: var(--chart-scroll-min, 32rem);
+  }
+
+  /* Under lg the whole sidebar becomes an off-canvas drawer */
+  .app-sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-3);
+  }
+  [dir="rtl"] .app-sidebar {
+    transform: translateX(100%);
+  }
+  .sidebar-open .app-sidebar {
+    transform: none;
+    z-index: 1045;
+  }
+  /* !important beats every desktop margin state while off-canvas */
+  .app-main {
+    margin-inline: 0 !important;
+  }
+  .sidebar-collapsed .header-expand {
+    display: none;
+  }
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: var(--backdrop);
+    z-index: 1044;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+  }
+  .sidebar-open .sidebar-backdrop {
+    opacity: 1;
+    visibility: visible;
+  }
+  .app-content {
+    --content-pad: 1rem;
+  }
+  .header-search {
+    max-width: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  :root {
+    --rail-w: 60px;
+    --panel-w: min(260px, calc(100vw - var(--rail-w) - 1.75rem));
+  }
+  .app-content {
+    --content-pad: 0.75rem;
+  }
+  .app-header {
+    --header-h: 72px;
+  }
+  /* The kbd hint is hidden under sm — reclaim the space it reserved */
+  .header-search input {
+    padding-inline-end: 1rem;
+  }
+  /* Logo scaled to sit with the 40px buttons; keeps the 46:36 artwork ratio. */
+  .sidebar-rail {
+    --rail-logo-box: 41px; /* .rail-logo height (31) + .logo-rail padding (10) */
+  }
+  .rail-logo {
+    width: 40px;
+    height: 31px;
+  }
+  .rail-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .rail-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .sidebar-link {
+    padding-inline: 0.75rem;
+    font-size: var(--fs-lg);
+  }
+  .sidebar-submenu .sidebar-child {
+    padding-inline-start: 2.25rem;
+  }
+  .promo-rocket {
+    width: 55px;
+    height: 60px;
+  }
+  .card-art {
+    max-width: 34%;
+  }
+}
